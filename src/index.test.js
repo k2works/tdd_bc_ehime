@@ -17,7 +17,7 @@ suite("ClosedRangeTest", () => {
     test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
       assert.throws(() => {
         new ClosedRange(8, 3);
-      }, "作れません");
+      }, "上端点(3)より下端点(8)が大きい閉区間は作れません");
     });
   });
   suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
@@ -57,7 +57,9 @@ suite("ClosedRangeTest", () => {
 class ClosedRange {
   constructor(lower, upper) {
     if (lower > upper) {
-      throw new Error("作れません");
+      throw new Error(
+        `上端点(${upper})より下端点(${lower})が大きい閉区間は作れません`
+      );
     }
     this._lower = lower;
     this._upper = upper;
