@@ -68,7 +68,7 @@ class ClosedRange {
   }
 
   include(number) {
-    if (this._lower <= number && this._upper >= number) {
+    if (this._lower <= number && number <= this._upper) {
       return true;
     }
     return false;
