@@ -175,20 +175,7 @@
         }
       </script>
 
-      <script>
-        mocha.setup("tdd");
-
-        const assert = chai.assert;
-        suite("HelloTest", () => {
-          test("Greeting", () => {
-            assert.equal("Hello", greeting());
-          });
-        });
-
-        function greeting() {
-          return "Hello!";
-        }
-      </script>
+      <script src="./index.test.js"></script>
 
       <script>
         const spec = document.getElementById("spec");
