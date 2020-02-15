@@ -13,10 +13,20 @@ suite("ClosedRangeTest", () => {
       assert.equal("[4,9]", closedRange.stringify());
     });
   });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
 });
 
 class ClosedRange {
   constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません");
+    }
     this._lower = lower;
     this._upper = upper;
   }
