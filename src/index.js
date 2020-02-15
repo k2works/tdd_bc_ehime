@@ -9,20 +9,14 @@ class ClosedRange {
     this._upper = upper;
   }
   stringify() {
-    let result = `[${this._lower},${this._upper}]`;
-    return result;
+    return `[${this._lower},${this._upper}]`;
   }
 
   include(number) {
-    if (this._lower <= number && number <= this._upper) {
-      return true;
-    }
-    return false;
+    return this._lower <= number && number <= this._upper;
   }
 
   equal(other) {
-    if (this._lower === other._lower && this._upper === this._upper)
-      return true;
-    return false;
+    return this._lower === other._lower && this._upper === this._upper;
   }
 }
