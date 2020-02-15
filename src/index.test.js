@@ -31,8 +31,8 @@ suite("ClosedRangeTest", () => {
     test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
       assert.isTrue(closedRange.isInRange(8));
     });
-    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
-      assert.isTrue(closedRange.isInRange(6));
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(9));
     });
     test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
       assert.isFalse(closedRange.isInRange(2));
