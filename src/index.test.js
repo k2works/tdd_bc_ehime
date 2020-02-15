@@ -52,4 +52,19 @@ suite("ClosedRangeTest", () => {
       assert.isFalse(closedRange.equal(closedRange2));
     });
   });
+
+  suite("別の閉区間に完全に含まれるかどうかも判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される", () => {
+      const closedRange2 = new ClosedRange(4, 7);
+      assert.isTrue(closedRange.includeObject(closedRange2));
+    });
+    test("閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される ", () => {
+      const closedRange2 = new ClosedRange(1, 2);
+      assert.isFalse(closedRange.includeObject(closedRange2));
+    });
+  });
 });

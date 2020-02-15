@@ -19,4 +19,8 @@ class ClosedRange {
   equal(other) {
     return this._lower === other._lower && this._upper === this._upper;
   }
+
+  includeObject(object) {
+    return this._lower <= object._lower && object._upper <= this._upper;
+  }
 }
