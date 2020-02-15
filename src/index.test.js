@@ -26,16 +26,16 @@ suite("ClosedRangeTest", () => {
       closedRange = new ClosedRange(3, 8);
     });
     test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
-      assert.isTrue(closedRange.isInRange(3));
+      assert.isTrue(closedRange.include(3));
     });
     test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
-      assert.isTrue(closedRange.isInRange(8));
+      assert.isTrue(closedRange.include(8));
     });
     test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
-      assert.isFalse(closedRange.isInRange(9));
+      assert.isFalse(closedRange.include(9));
     });
     test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
-      assert.isFalse(closedRange.isInRange(2));
+      assert.isFalse(closedRange.include(2));
     });
   });
   suite(" 別の閉区間と等価かどうか判定できる", () => {
@@ -67,7 +67,7 @@ class ClosedRange {
     return result;
   }
 
-  isInRange(number) {
+  include(number) {
     if (this._lower <= number && this._upper >= number) {
       return true;
     }
