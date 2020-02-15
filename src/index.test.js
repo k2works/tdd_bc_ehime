@@ -20,6 +20,12 @@ suite("ClosedRangeTest", () => {
       }, "作れません");
     });
   });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.isTrue(closedRange.isInRange(3));
+    });
+  });
 });
 
 class ClosedRange {
@@ -33,5 +39,12 @@ class ClosedRange {
   stringify() {
     let result = `[${this._lower},${this._upper}]`;
     return result;
+  }
+
+  isInRange(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
   }
 }
