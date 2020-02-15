@@ -38,6 +38,17 @@ suite("ClosedRangeTest", () => {
       assert.isFalse(closedRange.isInRange(2));
     });
   });
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される", () => {
+      const closedRange2 = new ClosedRange(3, 8);
+      assert.isTrue(closedRange.equal(closedRange2));
+    });
+    // - [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+  });
 });
 
 class ClosedRange {
@@ -57,6 +68,12 @@ class ClosedRange {
     if (this._lower <= number && this._upper >= number) {
       return true;
     }
+    return false;
+  }
+
+  equal(other) {
+    if (this._lower === other._lower && this._upper === this._upper)
+      return true;
     return false;
   }
 }
