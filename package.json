@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.js",
-    "format": "prettier --write src/**/*.*",
+    "format": "prettier --write src/**.*",
     "watch": "watch 'npm-run-all format' ./src ",
     "app": "browser-sync start --config bs-config.js",
     "deploy": "now"

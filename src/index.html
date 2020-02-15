@@ -179,145 +179,15 @@
         mocha.setup("tdd");
 
         const assert = chai.assert;
-        suite("FizzBuzzTest", () => {
-          let fizzbuzz;
-          setup("前準備", () => {
-            fizzbuzz = new FizzBuzz();
-          });
-          suite("三の倍数の場合", () => {
-            test("3を渡したら文字列Fizzを返す", () => {
-              assert.equal("Fizz", fizzbuzz.convert(3));
-            });
-          });
-          suite("五の倍数の場合", () => {
-            test("5を渡したら文字列Buzzを返す", () => {
-              assert.equal("Buzz", fizzbuzz.convert(5));
-            });
-          });
-          suite("三と五の倍数の場合", () => {
-            test("15を渡したら文字列FizzBuzzを返す", () => {
-              assert.equal("FizzBuzz", fizzbuzz.convert(15));
-            });
-          });
-          suite("その他の場合", () => {
-            test("1を渡したら文字列1を返す", () => {
-              assert.equal("1", fizzbuzz.convert(1));
-            });
-          });
-          suite("1 から 100 までの数", () => {
-            let result;
-            setup("前準備", () => {
-              result = fizzbuzz.convertList();
-            });
-            test("はじめは文字列の1を返す", () => {
-              assert.equal("1", result[0]);
-            });
-            test("最後は文字列の100を返す", () => {
-              assert.equal("Buzz", result[99]);
-            });
-            test("2番は文字列Fizzを返す", () => {
-              assert.equal("Fizz", result[2]);
-            });
-            test("4番は文字列Buzzを返す", () => {
-              assert.equal("Buzz", result[4]);
-            });
-            test("14番は文字列FizzBuzzを返す", () => {
-              assert.equal("FizzBuzz", result[14]);
-            });
+        suite("HelloTest", () => {
+          test("Greeting", () => {
+            assert.equal("Hello", greeting());
           });
         });
 
-        class FizzBuzz {
-          static get MAX_NUMBER() {
-            return 100;
-          }
-
-          convert(num) {
-            const isFizz = num % 3 === 0;
-            const isBuzz = num % 5 === 0;
-
-            if (isFizz && isBuzz) {
-              return "FizzBuzz";
-            }
-            if (isFizz) {
-              return "Fizz";
-            }
-            if (isBuzz) {
-              return "Buzz";
-            }
-            return num.toString();
-          }
-
-          convertList() {
-            // 配列は0から始まるの1を足している
-            return [...Array(FizzBuzz.MAX_NUMBER + 1).keys()]
-              .slice(1)
-              .map(this.convert);
-          }
+        function greeting() {
+          return "Hello";
         }
-
-        class FizzBuzzView {
-          constructor() {
-            this._fizzbuzz = new FizzBuzz();
-          }
-
-          render() {
-            const create = () => {
-              const table = () => {
-                const header = () => {
-                  const th = [...Array(11).keys()]
-                    .slice(1)
-                    .map(i => `<th>${i}</th>`);
-                  return `
-              <thead>
-                <tr>
-                  ${th.join("")}
-                </tr>
-              </thaed>
-            `;
-                };
-
-                const body = () => {
-                  const td = row =>
-                    [...Array(10).keys()]
-                      .map(
-                        i =>
-                          `<td>${this._fizzbuzz.convert(
-                            (row + 1) * (i + 1)
-                          )}</td>`
-                      )
-                      .join("");
-                  const tr = td =>
-                    [...Array(10).keys()]
-                      .map(i => `<tr>${td(i)}</tr>`)
-                      .join("");
-
-                  return `
-              <tbody>
-                ${tr(td)}
-              </tbody>
-            `;
-                };
-
-                return `
-                <table>
-                  ${header()}
-                  ${body()}
-                </table>
-              `;
-              };
-
-              return table();
-            };
-
-            document.querySelector("#app-fizz-buzz").innerHTML = create();
-            document.querySelector("#app-fizz-buzz > table").className =
-              "table table-sm table-striped";
-          }
-        }
-
-        const view = new FizzBuzzView();
-        view.render();
       </script>
 
       <script>
@@ -336,14 +206,12 @@
 
 ## ToDoリスト
 
-- [x] 数を文字列にして返す
-  - [x] 1を渡したら文字列"1"を返す
-  - [x] 2を渡したら文字列"2"を返す
-- [x] 3 の倍数のときは数の代わりに｢Fizz｣と返す
-- [x] 5 の倍数のときは｢Buzz｣と返す
-- [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
-- [x] 1 から 100 までの数
-- [x] プリントする
+- [ ] 数を文字列にして返す
+- [ ] 3 の倍数のときは数の代わりに｢Fizz｣と返す
+- [ ] 5 の倍数のときは｢Buzz｣と返す
+- [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
+- [ ] 1 から 100 までの数
+- [ ] プリントする
         `
           );
         }
@@ -355,14 +223,8 @@
           const outputId = "class-im";
           const source = `
 class FizzBuzz {
-  {static} MAX_NUMBER
-  convert(): String
-  convertList(): List
+  stringfy()
 }
-class FizzBuzzView {
-  render()
-}
-FizzBuzz <- FizzBuzzView
                   `;
           compress(source, outputId);
         })();
