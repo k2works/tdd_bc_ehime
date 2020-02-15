@@ -6,6 +6,10 @@ suite("ClosedRangeTest", () => {
     test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
       assert.equal("[3,8]", ClosedRange.stringify());
     });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      assert.equal("[4,9]", ClosedRange.stringify());
+    });
   });
 });
 
