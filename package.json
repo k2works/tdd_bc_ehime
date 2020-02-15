@@ -1,0 +1,46 @@
+{
+  "name": "tdd_bc_ehime",
+  "version": "1.0.0",
+  "description": "TDD Boot Campe in 愛媛",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start -j Procfile",
+    "build": "webpack --config webpack.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.*",
+    "watch": "watch 'npm-run-all format' ./src ",
+    "app": "browser-sync start --config bs-config.js",
+    "deploy": "now"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k2works/tdd_bc_ehime.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k2works/tdd_bc_ehime/issues"
+  },
+  "homepage": "https://github.com/k2works/tdd_bc_ehime#readme",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^0.17.0",
+    "browser-sync": "^2.26.7",
+    "codacy-coverage": "^3.4.0",
+    "connect-browser-sync": "^2.1.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^7.0.0",
+    "eslint": "^6.8.0",
+    "foreman": "^3.0.1",
+    "jshint": "^2.11.0",
+    "markdown-to-html": "0.0.13",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^2.0.2",
+    "now": "^17.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "watch": "^1.0.2"
+  }
+}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <title>テスト駆動開発から始めるJavaScript入門</title>
+  </head>
+  <body>
+    <!-- ヘッダー -->
+    <header class="py-4"></header>
+    <!-- /ヘッダー -->
+    <div class="container text-center">
+      <h1>テスト駆動開発から始める</h1>
+      <h1>JavaScript入門</h1>
+    </div>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark stick-top">
+      <!-- サブコンポーネント -->
+      <div class="container">
+        <a href="index.html" class="navbar-brand">TDDJavaScript</a>
+        <!-- 切り替えボタン -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar-content"
+          aria-controls="navbar-content"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- ナビゲーション -->
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <!-- ナビゲーションメニュー -->
+          <!-- 左側メニュー: トップページの各コンテンツへのリンク -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="#" class="nav-link"
+                >Top <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-hhaspopup="true"
+                aria-expanded="false"
+              >
+                Contents
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a href="#" class="dropdown-item">FizzBuzz</a>
+              </div>
+            </li>
+          </ul>
+          <!-- /ナビゲーションメニュー -->
+        </div>
+      </div>
+      <!-- サブコンポーネント -->
+    </nav>
+    <!-- メイン -->
+    <main>
+      <!-- コンテンツ01 -->
+      <div id="app"></div>
+      <!-- /コンテンツ01 -->
+    </main>
+    <!-- /メイン -->
+    <!-- フッター -->
+    <footer class="py-4 bg-dark text-light">
+      <div class="container text-center">
+        <!-- ナビゲーション -->
+        <ul class="nav justify-content-center mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Top</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contents</a>
+          </li>
+        </ul>
+        <!-- /ナビゲーション -->
+        <p>
+          <small>Copyright &copy;2019 HiroshiamARC, All Rights Reserved.</small>
+        </p>
+      </div>
+    </footer>
+    <!-- /フッター -->
+    <div id="dev">
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+      <!-- PapaParse -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.js"></script>
+
+      <!-- nanoSQL2 -->
+      <!-- ES6 Only (Faster & Smaller) -->
+      <script
+        src="https://cdn.jsdelivr.net/npm/@nano-sql/core@2.3.7/dist/nano-sql.min.js"
+        integrity="sha256-W1pVgKda7GC4fwXqq9jfOrssBDJJXZqck+ultRPVzmc="
+        crossorigin="anonymous"
+      ></script>
+      <!-- ES5 (Internet Explorer/Old Browser Support) -->
+      <!-- Promise must be polyfilled as well -->
+      <script
+        src="https://cdn.jsdelivr.net/npm/@nano-sql/core@2.3.7/dist/nano-sql.min.es5.js"
+        integrity="sha256-1t9VlpFUgHaxlLQy6HM9ROQvTiuUv2M12Fp1oTh3+yg="
+        crossorigin="anonymous"
+      ></script>
+
+      <!-- markdown -->
+      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+      <!-- PluntUML -->
+      <!--  taken from https://github.com/johan/js-deflate -->
+      <script src="./lib/rawdeflate.js"></script>
+
+      <!-- mocha, chai -->
+      <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+      <script>
+        const dev = document.querySelector("#app");
+        if (dev !== null) {
+          dev.innerHTML = `
+          <div class="container">
+            <h1>FizzBuzz</h1>
+            <div class="row p-3">
+              <div id="spec"></div>
+            </div>
+            <h2>クラス図</h2>
+            <div class="row p-3">
+              <img id="class-im"
+              src=http://www.plantuml.com/plantuml/img/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000>
+            </div>
+            <h2>アプリケーション</h2>
+              <div id="app-fizz-buzz"></div>
+              <div id="mocha"></div>
+            </div>
+          </div> `;
+        }
+      </script>
+
+      <script>
+        mocha.setup("tdd");
+
+        const assert = chai.assert;
+        suite("FizzBuzzTest", () => {
+          let fizzbuzz;
+          setup("前準備", () => {
+            fizzbuzz = new FizzBuzz();
+          });
+          suite("三の倍数の場合", () => {
+            test("3を渡したら文字列Fizzを返す", () => {
+              assert.equal("Fizz", fizzbuzz.convert(3));
+            });
+          });
+          suite("五の倍数の場合", () => {
+            test("5を渡したら文字列Buzzを返す", () => {
+              assert.equal("Buzz", fizzbuzz.convert(5));
+            });
+          });
+          suite("三と五の倍数の場合", () => {
+            test("15を渡したら文字列FizzBuzzを返す", () => {
+              assert.equal("FizzBuzz", fizzbuzz.convert(15));
+            });
+          });
+          suite("その他の場合", () => {
+            test("1を渡したら文字列1を返す", () => {
+              assert.equal("1", fizzbuzz.convert(1));
+            });
+          });
+          suite("1 から 100 までの数", () => {
+            let result;
+            setup("前準備", () => {
+              result = fizzbuzz.convertList();
+            });
+            test("はじめは文字列の1を返す", () => {
+              assert.equal("1", result[0]);
+            });
+            test("最後は文字列の100を返す", () => {
+              assert.equal("Buzz", result[99]);
+            });
+            test("2番は文字列Fizzを返す", () => {
+              assert.equal("Fizz", result[2]);
+            });
+            test("4番は文字列Buzzを返す", () => {
+              assert.equal("Buzz", result[4]);
+            });
+            test("14番は文字列FizzBuzzを返す", () => {
+              assert.equal("FizzBuzz", result[14]);
+            });
+          });
+        });
+
+        class FizzBuzz {
+          static get MAX_NUMBER() {
+            return 100;
+          }
+
+          convert(num) {
+            const isFizz = num % 3 === 0;
+            const isBuzz = num % 5 === 0;
+
+            if (isFizz && isBuzz) {
+              return "FizzBuzz";
+            }
+            if (isFizz) {
+              return "Fizz";
+            }
+            if (isBuzz) {
+              return "Buzz";
+            }
+            return num.toString();
+          }
+
+          convertList() {
+            // 配列は0から始まるの1を足している
+            return [...Array(FizzBuzz.MAX_NUMBER + 1).keys()]
+              .slice(1)
+              .map(this.convert);
+          }
+        }
+
+        class FizzBuzzView {
+          constructor() {
+            this._fizzbuzz = new FizzBuzz();
+          }
+
+          render() {
+            const create = () => {
+              const table = () => {
+                const header = () => {
+                  const th = [...Array(11).keys()]
+                    .slice(1)
+                    .map(i => `<th>${i}</th>`);
+                  return `
+              <thead>
+                <tr>
+                  ${th.join("")}
+                </tr>
+              </thaed>
+            `;
+                };
+
+                const body = () => {
+                  const td = row =>
+                    [...Array(10).keys()]
+                      .map(
+                        i =>
+                          `<td>${this._fizzbuzz.convert(
+                            (row + 1) * (i + 1)
+                          )}</td>`
+                      )
+                      .join("");
+                  const tr = td =>
+                    [...Array(10).keys()]
+                      .map(i => `<tr>${td(i)}</tr>`)
+                      .join("");
+
+                  return `
+              <tbody>
+                ${tr(td)}
+              </tbody>
+            `;
+                };
+
+                return `
+                <table>
+                  ${header()}
+                  ${body()}
+                </table>
+              `;
+              };
+
+              return table();
+            };
+
+            document.querySelector("#app-fizz-buzz").innerHTML = create();
+            document.querySelector("#app-fizz-buzz > table").className =
+              "table table-sm table-striped";
+          }
+        }
+
+        const view = new FizzBuzzView();
+        view.render();
+      </script>
+
+      <script>
+        const spec = document.getElementById("spec");
+        if (spec) {
+          // eslint-disable-next-line no-undef
+          spec.innerHTML = marked(
+            `
+## 仕様
+
+1 から 100 までの数をプリントするプログラムを書け。
+
+ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、
+
+3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること
+
+## ToDoリスト
+
+- [x] 数を文字列にして返す
+  - [x] 1を渡したら文字列"1"を返す
+  - [x] 2を渡したら文字列"2"を返す
+- [x] 3 の倍数のときは数の代わりに｢Fizz｣と返す
+- [x] 5 の倍数のときは｢Buzz｣と返す
+- [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
+- [x] 1 から 100 までの数
+- [x] プリントする
+        `
+          );
+        }
+      </script>
+      <script>
+        /* eslint-disable */
+        const classDiagram = (() => {
+          const inputId = "class-diagram-input";
+          const outputId = "class-im";
+          const source = `
+class FizzBuzz {
+  {static} MAX_NUMBER
+  convert(): String
+  convertList(): List
+}
+class FizzBuzzView {
+  render()
+}
+FizzBuzz <- FizzBuzzView
+                  `;
+          compress(source, outputId);
+        })();
+
+        function encode64(data) {
+          r = "";
+          for (i = 0; i < data.length; i += 3) {
+            if (i + 2 == data.length) {
+              r += append3bytes(data.charCodeAt(i), data.charCodeAt(i + 1), 0);
+            } else if (i + 1 == data.length) {
+              r += append3bytes(data.charCodeAt(i), 0, 0);
+            } else {
+              r += append3bytes(
+                data.charCodeAt(i),
+                data.charCodeAt(i + 1),
+                data.charCodeAt(i + 2)
+              );
+            }
+          }
+          return r;
+        }
+
+        function append3bytes(b1, b2, b3) {
+          c1 = b1 >> 2;
+          c2 = ((b1 & 0x3) << 4) | (b2 >> 4);
+          c3 = ((b2 & 0xf) << 2) | (b3 >> 6);
+          c4 = b3 & 0x3f;
+          r = "";
+          r += encode6bit(c1 & 0x3f);
+          r += encode6bit(c2 & 0x3f);
+          r += encode6bit(c3 & 0x3f);
+          r += encode6bit(c4 & 0x3f);
+          return r;
+        }
+
+        function encode6bit(b) {
+          if (b < 10) {
+            return String.fromCharCode(48 + b);
+          }
+          b -= 10;
+          if (b < 26) {
+            return String.fromCharCode(65 + b);
+          }
+          b -= 26;
+          if (b < 26) {
+            return String.fromCharCode(97 + b);
+          }
+          b -= 26;
+          if (b == 0) {
+            return "-";
+          }
+          if (b == 1) {
+            return "_";
+          }
+          return "?";
+        }
+
+        var deflater = window.SharedWorker && new SharedWorker("rawdeflate.js");
+        if (deflater) {
+          deflater.port.addEventListener("message", done_deflating, false);
+          deflater.port.start();
+        } else if (window.Worker) {
+          deflater = new Worker("rawdeflate.js");
+          deflater.onmessage = done_deflating;
+        }
+
+        function done_deflating(e, id) {
+          document.getElementById(id).src =
+            "http://www.plantuml.com/plantuml/img/" + encode64(e.data);
+        }
+
+        function compress(s, id) {
+          //UTF8
+          s = unescape(encodeURIComponent(s));
+
+          if (deflater) {
+            if (deflater.port && deflater.port.postMessage) {
+              deflater.port.postMessage(s);
+            } else {
+              deflater.postMessage(s);
+            }
+          } else {
+            setTimeout(function() {
+              done_deflating({ data: deflate(s) }, id);
+            }, 100);
+          }
+        }
+      </script>
+      <script>
+        mocha.globals(["jQuery"]);
+        mocha.run();
+      </script>
+    </div>
+  </body>
+</html>
