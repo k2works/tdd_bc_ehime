@@ -21,20 +21,20 @@ suite("ClosedRangeTest", () => {
     });
   });
   suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
     test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
-      const closedRange = new ClosedRange(3, 8);
       assert.isTrue(closedRange.isInRange(3));
     });
     test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
-      const closedRange = new ClosedRange(3, 8);
       assert.isTrue(closedRange.isInRange(8));
     });
     test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
-      const closedRange = new ClosedRange(3, 8);
       assert.isTrue(closedRange.isInRange(6));
     });
     test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
-      const closedRange = new ClosedRange(3, 8);
       assert.isFalse(closedRange.isInRange(2));
     });
   });
