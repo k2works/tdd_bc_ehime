@@ -52,6 +52,7 @@ module.exports = {
       filename: "./contents.css",
       chunkFilename: "[id].css"
     }),
-    new CopyWebpackPlugin([{ from: "src/lib", to: "lib" }])
+    new CopyWebpackPlugin([{ from: "src/lib", to: "lib" }]),
+    new CopyWebpackPlugin([{ from: "src/app", to: "app" }])
   ]
 };

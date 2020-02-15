@@ -158,7 +158,7 @@
         if (dev !== null) {
           dev.innerHTML = `
           <div class="container">
-            <h1>FizzBuzz</h1>
+            <h1>整数の閉区間</h1>
             <div class="row p-3">
               <div id="spec"></div>
             </div>
@@ -175,20 +175,8 @@
         }
       </script>
 
-      <script>
-        mocha.setup("tdd");
-
-        const assert = chai.assert;
-        suite("HelloTest", () => {
-          test("Greeting", () => {
-            assert.equal("Hello", greeting());
-          });
-        });
-
-        function greeting() {
-          return "Hello";
-        }
-      </script>
+      <script src="./app/closed_range.js"></script>
+      <script src="./app/closed_range.test.js"></script>
 
       <script>
         const spec = document.getElementById("spec");
@@ -198,20 +186,51 @@
             `
 ## 仕様
 
-1 から 100 までの数をプリントするプログラムを書け。
+### Done
+整数閉区間オブジェクトは下端点と上端点を持ち、
 
-ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、
+文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。
 
-3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること
+
+ただし、
+
+上端点より下端点が大きい閉区間を作ることはできない。
+
+整数の閉区間は指定した整数を含むかどうかを判定できる。
+
+また、
+
+別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+
+
+整数閉区間を示すクラス（あるいは構造体）をつくりたい。
 
 ## ToDoリスト
 
-- [ ] 数を文字列にして返す
-- [ ] 3 の倍数のときは数の代わりに｢Fizz｣と返す
-- [ ] 5 の倍数のときは｢Buzz｣と返す
-- [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
-- [ ] 1 から 100 までの数
-- [ ] プリントする
+- [x] 文字列表現も返す
+ - [x] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+ - [x] 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す
+- [x] 整数区間オブジェクトを作る
+ - [x] 下端点と上端点を持つ
+---
+- [x] 上端点より下端点が大きい閉区間を作ることはできない
+  - [x] 下端点 8, 上端点 3 ならばエラーが発生する
+- [x] 整数の閉区間は指定した整数を含むかどうかを判定できる
+  - [x] 閉区間[3,8]の場合、3ならは含まれると判定(true)される
+  - [x] 閉区間[3,8]の場合、8ならは含まれると判定(true)される
+  - [x] 閉区間[3,8]の場合、9ならは含まれると判定(false)される
+  - [x] 閉区間[3,8]の場合、2ならは含まれないと判定(false)される
+---
+- [x] 別の閉区間と等価かどうか判定できる
+  - [x] 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される
+  - [x] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+- [x] 別の閉区間に完全に含まれるかどうかも判定できる
+  - [x] 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される
+  - [x] 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される
+
+## 後で考える
+- [ ] nullやundefinedの場合
+- [ ] 小数の場合
         `
           );
         }
@@ -222,8 +241,13 @@
           const inputId = "class-diagram-input";
           const outputId = "class-im";
           const source = `
-class FizzBuzz {
+class ClosedRange {
+  _lower
+  _upper
   stringfy()
+  include(number)
+  equal(other)
+  includeObject(object)
 }
                   `;
           compress(source, outputId);
