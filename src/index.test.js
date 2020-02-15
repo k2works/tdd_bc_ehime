@@ -47,7 +47,10 @@ suite("ClosedRangeTest", () => {
       const closedRange2 = new ClosedRange(3, 8);
       assert.isTrue(closedRange.equal(closedRange2));
     });
-    // - [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+    test("閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される", () => {
+      const closedRange2 = new ClosedRange(4, 8);
+      assert.isFalse(closedRange.equal(closedRange2));
+    });
   });
 });
 
