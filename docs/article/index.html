@@ -537,19 +537,25 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#_仕様_2">4.1. 仕様</a></li>
 <li><a href="#_todoリスト_2">4.2. TODOリスト</a></li>
-<li><a href="#_仮実装を経て明白な実装へ">4.3. 仮実装を経て明白な実装へ</a></li>
+<li><a href="#_仮実装から実装へ">4.3. 仮実装から実装へ</a></li>
 <li><a href="#_リファクタリング_2">4.4. リファクタリング</a></li>
 </ul>
 </li>
-<li><a href="#_コードレビュー_1回目">5. コードレビュー(1回目)</a></li>
+<li><a href="#_コードレビュー_1回目">5. コードレビュー(1回目)</a>
+<ul class="sectlevel2">
+<li><a href="#_todoリスト_3">5.1. TODOリスト</a></li>
+<li><a href="#_コード">5.2. コード</a></li>
+<li><a href="#_レビュー">5.3. レビュー</a></li>
+</ul>
+</li>
 <li><a href="#_tdd_ペアプログラミング_実習_3回目">6. TDD&amp;ペアプログラミング 実習(3回目)</a>
 <ul class="sectlevel2">
 <li><a href="#_仕様_3">6.1. 仕様</a></li>
-<li><a href="#_todoリスト_3">6.2. TODOリスト</a></li>
+<li><a href="#_todoリスト_4">6.2. TODOリスト</a></li>
 <li><a href="#_リファクタリング_3">6.3. リファクタリング</a></li>
 <li><a href="#_リリース">6.4. リリース</a>
 <ul class="sectlevel3">
-<li><a href="#_todoリスト_4">6.4.1. TODOリスト</a></li>
+<li><a href="#_todoリスト_5">6.4.1. TODOリスト</a></li>
 <li><a href="#_クラス図">6.4.2. クラス図</a></li>
 <li><a href="#_プログラム">6.4.3. プログラム</a></li>
 </ul>
@@ -567,13 +573,13 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_基調講演">1. 基調講演</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>お約束の <a href="https://twitter.com/ramusara/status/1228485948050042881" target="_blank" rel="noopener">アレ</a> から始まり、最初のテスト駆動開発とは何かというお話の内容としては自分が実践してきたテスト駆動開発と認識のズレはなかったので良かった。 <strong>やはり俺のテスト駆動開発に対する理解は間違っていなかった。</strong> ただ、<strong>テスト駆動開発で言及されているリファクタリングとマーティンファウラーのリファクタリングではサイズ感が違う</strong> というのは新しい気づきだった。</p>
+<p>お約束の <a href="https://twitter.com/ramusara/status/1228485948050042881" target="_blank" rel="noopener">アレ</a> から始まり、最初のテスト駆動開発とは何かというお話の内容としては自分が実践してきたテスト駆動開発と認識のズレはなかったので良かった。 <a href="https://hiroshima-arc.connpass.com/" target="_blank" rel="noopener">勉強会</a> を実施したり <a href="https://qiita.com/k2works/items/83741e3e2d2579d748d6" target="_blank" rel="noopener">テスト駆動開発の記事</a> を書いて専門学校の講義に使ったりしてきたけど　<strong>やはり俺のテスト駆動開発に対する理解は間違っていなかった</strong> ようだ。ただ、<strong>テスト駆動開発で言及されているリファクタリングとマーティンファウラーの <a href="https://www.amazon.co.jp/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-%E6%97%A2%E5%AD%98%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E6%94%B9%E5%96%84%E3%81%99%E3%82%8B%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89-%EF%BC%AD%EF%BD%81%EF%BD%92%EF%BD%94%EF%BD%89%EF%BD%8E%EF%BC%A6%EF%BD%8F%EF%BD%97%EF%BD%8C%EF%BD%85%EF%BD%92-ebook/dp/B0827R4BDW/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;keywords=%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0&amp;qid=1582016208&amp;s=digital-text&amp;sr=1-1" target="_blank" rel="noopener">リファクタリング</a> ではサイズ感が違う</strong> というのは新しい気づきだった。</p>
 </div>
 <div class="paragraph">
-<p>続いて、ライブコーディングだけどお題は <strong>FizzBuzz問題</strong> 内容は <a href="https://channel9.msdn.com/Events/de-code/2017/DO03?ocid=player" target="_blank" rel="noopener">50 分でわかるテスト駆動開発</a> を以前視聴していたので流れは大体知っていたけどお題からTODOに落とし込むあたりの作業が動画の時よりバージョンアップしていてよりわかりやすい流れになっていた。後半のシンプルなFizzBuzzプログラムを例えにした保守運用に向けた注意は実際に現場で起きている問題を反映しているのだと思うと興味深い内容だった。このへんが <a href="https://www.shoeisha.co.jp/book/detail/9784798116839" target="_blank" rel="noopener">レガシーコード改善ガイド</a> へとつながっていくのかなと個人的に思った。</p>
+<p>続いて、ライブコーディングのお題は <strong><a href="https://ja.wikipedia.org/wiki/Fizz_Buzz" target="_blank" rel="noopener">FizzBuzz問題</a></strong> 。 内容は <a href="https://channel9.msdn.com/Events/de-code/2017/DO03?ocid=player" target="_blank" rel="noopener">50 分でわかるテスト駆動開発</a> を以前視聴していたので流れは大体知っていたけどお題からTODOに落とし込むあたりの作業が動画の時よりバージョンアップしていてよりわかりやすい流れになっていた。後半のシンプルなFizzBuzzプログラムを使った保守運用に向けた解説は実際に現場で起きている問題を反映しているのだと思うと興味深い内容だった。このへんが <a href="https://www.shoeisha.co.jp/book/detail/9784798116839" target="_blank" rel="noopener">レガシーコード改善ガイド</a> へとつながっていくのかなと個人的に思った。</p>
 </div>
 <div class="paragraph">
-<p>ライブコーディングの内容として自分は <strong>抽象から具体へ具体から抽象へ</strong> を小さなサイクルで何度も回しているなという印象を受けた。自分も最近は <strong>抽象と具体</strong> の往復は意識しているのだがやはり上手な人が実際にやるのを見れるのは実に学びがある。こればかりは文章ではなかなか伝えられないのである。</p>
+<p>ライブコーディングの内容として自分は <strong>抽象から具体へ具体から抽象へ</strong> を小さなサイクルで何度も回しているなという印象を受けた。自分も最近は <strong>抽象と具体</strong> の往復は意識しているのだがやはり上手な人が実際にやるのを見れるのは実に学びがある。こればかりは文章ではなかなか伝えられないのよね。</p>
 </div>
 </div>
 </div>
@@ -594,7 +600,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="paragraph">
-<p>実演でもドライバ後退時にUS配列キーボードで戸惑うなど <strong>ペアプロあるある</strong> が見受けられた。ちなみに自分のメイン開発環境はVSCodeにVimキーバインドなのでペアがVimerでもないかぎり間違いなく戸惑うと思う。幸いペアの方が <a href="https://docs.microsoft.com/ja-jp/visualstudio/liveshare/" target="_blank" rel="noopener">Visual Studio Live Share</a> をVSCodeで使ってもオッケーとのことだったのでその辺の問題は回避できた。</p>
+<p>実演でもドライバ交代時にUS配列キーボードで戸惑うなど <strong>ペアプロあるある</strong> が見受けられた。ちなみに自分のメイン開発環境はVSCodeにVimキーバインドなのでペアがVimerでもないかぎり間違いなく戸惑うと思う。幸いペアの方が <a href="https://docs.microsoft.com/ja-jp/visualstudio/liveshare/" target="_blank" rel="noopener">Visual Studio Live Share</a> をVSCodeで使ってもオッケーとのことだったのでその辺の問題は回避できた。</p>
 </div>
 </div>
 </div>
@@ -602,12 +608,12 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_tdd_ペアプログラミング_実習_1回目">3. TDD&amp;ペアプログラミング 実習(1回目)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>午後からペアプログラミングによるテスト駆動開発の実践に入るわけだが、今回自分が選択した言語は <code>JavaScript</code> でテスティングフレームワークには <code>Mocha</code> を使った構成でやってます。表記スタイルをTDDにしているのでBDDスタイルとは違うけどあしからず。以下のコードがたくさん出てくるけど、これは <strong>プログラミングの速さを競うのではなく、テストを書いて動かすことによるフィードバックを受けながら、リファクタリングを忘れず着実に進めていく</strong> 演習の目的をできるだけ伝えようとしたらこうなってしまったわけであり結論だけ知りたいならばここは読み飛ばして <strong>クロージング</strong> に進んでください。まあ、個人的にはここがテスト駆動開発のキモだと思ってるけど・・・</p>
+<p>午後からペアプログラミングによるテスト駆動開発の実践に入るわけだけど、今回自分が選択した言語は <code>JavaScript</code> でテスティングフレームワークには <code>Mocha</code> を使った構成でやった。表記スタイルをTDDにしているのでBDDスタイルとは違うけどあしからず。以下コードがたくさん出てくるけど、これは <strong>プログラミングの速さを競うのではなく、テストを書いて動かすことによるフィードバックを受けながら、リファクタリングを忘れず着実に進めていく</strong> 演習の目的をできるだけ伝えようとしたらこうなってしまったわけであり結論だけ知りたいならばここは読み飛ばして <strong>クロージング</strong> へ。まあ、個人的にはここがテスト駆動開発のキモだと思ってるけど・・・</p>
 </div>
 <div class="sect2">
 <h3 id="_仕様">3.1. 仕様</h3>
 <div class="paragraph">
-<p>最初にお題ですが今回は <code>整数の区間</code>。調べたら <a href="http://devtesting.jp/tddbc/" target="_blank" rel="noopener">過去にも取り上げられたお題</a> みたい。</p>
+<p>最初にお題だけど今回は <code>整数の区間</code>。調べたら <a href="http://devtesting.jp/tddbc/" target="_blank" rel="noopener">過去にも取り上げられたお題</a> みたい。</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -615,7 +621,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="paragraph">
-<p>ペプパートナーと最初に取り組んだのがお題の理解と <strong>TODOリスト</strong> への分割。とりあえず <code>ただし、</code> や <code>また、</code> といった接続詞ごとに分割して <strong>プログラミングしやすいところから組むようにした。</strong></p>
+<p>ペアと最初に取り組んだのがお題の理解と <strong>TODOリスト</strong> への分割。とりあえず <code>ただし、</code> や <code>また、</code> といった接続詞ごとに分割して <strong>プログラミングしやすいところから組むようにした。</strong></p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -633,7 +639,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect2">
 <h3 id="_todoリスト">3.2. TODOリスト</h3>
 <div class="paragraph">
-<p>そして、最初の <strong>TODOリスト</strong> がこちら。</p>
+<p>最初に作った <strong>TODOリスト</strong> がこちら。</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
@@ -663,7 +669,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect2">
 <h3 id="_仮実装">3.3. 仮実装</h3>
 <div class="paragraph">
-<p>最初に失敗するコードを書いたらまずは <strong>仮実装</strong> でテストをパスするベタ書きのコードを書く。 クラスを使いたいとのことだけど <code>JavaScript</code> で <code>class</code> キーワードを使うのは人によってはアレなんだけどペアの人は使ってもオッケーな人だったので <code>class</code> キーワードで実装した。これが <code>function</code> による実装なら、それはそれで面白かったかもね。</p>
+<p>最初に失敗するコードを書いたらまずは <strong>仮実装</strong> でテストをパスするベタ書きのコードを書いた。 クラスを作りたいとのことだけど <code>JavaScript</code> で <code>class</code> キーワードを使うのは人によってはアレなんだけどペアの人は使ってもオッケーな人だったので <code>class</code> キーワードで実装した。これが <code>function</code> による実装なら、それはそれで面白かったかも。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -689,7 +695,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="sect2">
 <h3 id="_三角測量">3.4. 三角測量</h3>
 <div class="paragraph">
-<p><strong>仮実装</strong> で <strong>TODOリスト</strong> を一つ片付けたけどコードはベタ書きのまま・・・ここは <strong>三角測量</strong> を実施してメソッドの一般化を進めることにした。まず、 <strong>TODOリスト</strong> を追加。</p>
+<p><strong>仮実装</strong> で <strong>TODOリスト</strong> を一つ片付けたけどコードはベタ書きのまま・・・ここは <strong>三角測量</strong> を実施してメソッドの一般化を進めることにした。まず、 <strong>TODOリスト</strong> を追加する。</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
@@ -719,7 +725,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </ul>
 </div>
 <div class="paragraph">
-<p>追加テストが失敗(レッド)からベタ書きのコードを変更してテスト成功（グリーン）へ。ちなみにこの間８分ごとに交代しながらペアプログラミングしてるけどナビゲーター役のときもなんだかんだで脳内コーディングして活発に意見交換してた。</p>
+<p>追加テストが失敗(レッド)からベタ書きのコードを変更してテスト成功（グリーン）へ。ちなみにこの間８分ごとに交代しながらペアプログラミングしてるけどナビゲーター役の時もなんだかんだで脳内コーディングして活発に意見交換してた。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -802,7 +808,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="paragraph">
-<p>(1),(2) の部分はJavaScriptだとグローバル変数制限になる！ <code>JavaScript</code> の中でもトップレベルのあかんやつやらかしたけどペアの指摘のおかげで早期発見早期対応ができた。言い訳だけど最近は <code>Ruby</code> のコードばかり書いていたので変数もその感覚で書いてた。</p>
+<p>(1),(2) の部分はJavaScriptだとグローバル変数宣言になる！ <code>JavaScript</code> の中でもトップレベルのあかんやつやらかしたけどペアの指摘のおかげで早期発見早期対応ができた。言い訳だけど最近は <code>Ruby</code> のコードばかり書いていたので変数もその感覚で書いてた。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -825,7 +831,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <p>(1),(2) は <code>const</code> で再代入不可のローカル変数にリファクタリングする。</p>
 </div>
 <div class="paragraph">
-<p>あと、今回はバージョン管理システムを使って作業を進めているんだけどすでにこの時点で６回ぐらいコミットしてる。コミットメッセージに <code>test</code> とか <code>refactor</code> とかつけてやってるんだけどこれは <a href="https://www.conventionalcommits.org/ja/v1.0.0/" target="_blank" rel="noopener">Conventional Commits</a> の仕様があるそうだ、今回は初めて知った。</p>
+<p>あと、今回はバージョン管理システムを使って作業を進めているんだけどすでにこの時点で６回ぐらいコミットしてる。コミットメッセージに <code>test</code> とか <code>refactor</code> とかつけてやってるんだけどこれは <a href="https://www.conventionalcommits.org/ja/v1.0.0/" target="_blank" rel="noopener">Conventional Commits</a> という仕様があるそうだ、初めて知った。</p>
 </div>
 </div>
 </div>
@@ -852,7 +858,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="sect2">
 <h3 id="_todoリスト_2">4.2. TODOリスト</h3>
 <div class="paragraph">
-<p><strong>TODOリスト</strong> は前回のパターンの踏襲してとりあえず例外を投げる実装にしてみる。</p>
+<p><strong>TODOリスト</strong> は前回のパターンの踏襲しつつとりあえず例外を投げる実装にしてみる。</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
@@ -870,7 +876,10 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="sect2">
-<h3 id="_仮実装を経て明白な実装へ">4.3. 仮実装を経て明白な実装へ</h3>
+<h3 id="_仮実装から実装へ">4.3. 仮実装から実装へ</h3>
+<div class="paragraph">
+<p>(1) でまず期待する振る舞いを書いて失敗する（レッド）ことを確認したら、(2) のコンストラクタ作成時に例外を投げるようにしてテストを成功させる（グリーン）。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">suite(<span class="string"><span class="delimiter">&quot;</span><span class="content">ClosedRangeTest</span><span class="delimiter">&quot;</span></span>, () =&gt; {
@@ -910,7 +919,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="paragraph">
-<p>例外メッセージ <strong>作れません</strong> とか・・・ちょっとアレだけどもう少し全体のイメージができたてから <strong>リファクタリング</strong> しよう。</p>
+<p>例外メッセージが <strong>作れません</strong> とか・・・ちょっとアレだけどもう少し全体のイメージができたてから <strong>リファクタリング</strong> しよう。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1053,9 +1062,8 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="paragraph">
 <p>光栄にもコードレビュー１回目の代表に指名していただいたのでありがたくレビューを受けることにした。</p>
 </div>
-<div class="paragraph">
-<p>進捗状況は7割といったあたりでまだ未実装の機能があります。</p>
-</div>
+<div class="sect2">
+<h3 id="_todoリスト_3">5.1. TODOリスト</h3>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
@@ -1138,6 +1146,12 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>進捗状況は7割といったところ。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_コード">5.2. コード</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">suite(<span class="string"><span class="delimiter">&quot;</span><span class="content">ClosedRangeTest</span><span class="delimiter">&quot;</span></span>, () =&gt; {
@@ -1218,6 +1232,9 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_レビュー">5.3. レビュー</h3>
 <div class="paragraph">
 <p>主要なレビュー指摘事項は</p>
 </div>
@@ -1241,10 +1258,8 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </ul>
 </div>
 <div class="paragraph">
-<p>(4) に関しては <strong>値オブジェクト</strong> の生成パターンを意識していたのですが例外を投げるパターンは設計アプローチの一つとして議論した。</p>
+<p>(4) に関しては <strong>値オブジェクト</strong> の生成パターンを意識していたのだけど例外を投げるパターンは設計アプローチの一つとして議論した。普段、ボッチ開発している自分としては人様からまさかりを投げていただくというありがたい経験ができた。</p>
 </div>
-<div class="paragraph">
-<p>普段、ボッチ開発している自分としては人様からまさかりを投げていただくというありがたい経験ができた。</p>
 </div>
 </div>
 </div>
@@ -1265,7 +1280,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="sect2">
-<h3 id="_todoリスト_3">6.2. TODOリスト</h3>
+<h3 id="_todoリスト_4">6.2. TODOリスト</h3>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
@@ -1302,6 +1317,9 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="paragraph">
 <p>では機能を追加してリリース！と思っていたけどペアにまずはリファクタリングと指摘されてはっと我に返る。意識はしているんだけどついつい機能を作る方に意識が行ってしまうのでこのような指摘は非常にありがたい。まずはコードレビュー指摘事項から取り組むことにする。</p>
 </div>
+<div class="paragraph">
+<p>このテストケースは境界値テストとしては不要なので</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">...
@@ -1312,7 +1330,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="paragraph">
-<p>境界値テストで不要なテストを不足するテストに変更する。</p>
+<p>不要なテストを不足するテストに変更する。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1415,10 +1433,10 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="sect2">
 <h3 id="_リリース">6.4. リリース</h3>
 <div class="paragraph">
-<p>最終的に出来たのがこちら</p>
+<p>なんとか時間内に仕様を満たすプログラムを作ることが出来た。</p>
 </div>
 <div class="sect3">
-<h4 id="_todoリスト_4">6.4.1. TODOリスト</h4>
+<h4 id="_todoリスト_5">6.4.1. TODOリスト</h4>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
@@ -1636,7 +1654,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="paragraph">
-<p>ついでに　<a href="https://tdd-bc-ehime.k2works.now.sh/" target="_blank" rel="noopener">デプロイ</a> もやってみた。</p>
+<p>ついでに　<a href="https://tdd-bc-ehime.k2works.now.sh/" target="_blank" rel="noopener">デプロイ</a> してみた。</p>
 </div>
 </div>
 </div>
@@ -1647,7 +1665,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="sectionbody">
 <div class="paragraph">
 <p>コードレビュー２回目は Rubyチームの発表。レビューする立場になってみるとこれはこれで難しいことがわかった。
-あと、プロダクトコードからではなくテストコードを構造化して日本語仕様として読み事でそこからプロダクトコードの問題点を指摘するというアプローチは言語を問わず有効だと思った。</p>
+あと、プロダクトコードからではなくテストコードを構造化して日本語仕様として読むことでそこからプロダクトコードの問題点を指摘するというアプローチは言語を問わず有効だと思った。</p>
 </div>
 </div>
 </div>
@@ -1655,11 +1673,12 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <h2 id="_クロージング">8. クロージング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>やはり俺のテスト駆動開発に対する理解は間違っていなかった</strong> という感触をつかめた TDD Boot Camplではあったけど
-ペアプログラミングに関しては今まで自分がやっていたのはペアプログラミングではなかった <strong>やはり俺のペアプログラミングは間違っている</strong> ので今日の経験を次回から反映していきたい。
-今回は品質に関しても多く言及していたけどその中で自分のテスト駆動開発に対する立ち位置は動作するサンプルを書きながら設計を改善する活動でありソフトウェア品質という面ではどこか一歩引いていたことが自覚できた。
-つまり <strong>やはり俺のテスト駆動開発は動作するサンプルを書きながら設計を改善する活動だった</strong> ことを明確に意識することが出来た一方で <strong>やはり俺のテスト駆動開発における品質に対する意識は低かった</strong> 気づきを得ることが出来た。
-今後の課題として取り組みたい。あと、レガシーコード改善ガイドではカタログでそのまま <strong>テスト駆動開発</strong> を使うと記述されているのでテスト駆動開発はなにも新規開発だけで使える開発手法ではないという知見も今後広まっていくのではないかと思った。</p>
+<p><strong>やはり俺のテスト駆動開発に対する理解は間違っていなかった</strong> という感触をつかめた TDD Boot Campではあったけど
+ペアプログラミングに関しては今まで自分がやっていたのはペアプログラミングではなかった <strong>やはり俺のペアプログラミングは間違っている</strong> ので今回の経験を次回から反映していきたい。
+今回は品質に関しても多く言及していたけどその中で自分のテスト駆動開発に対する立ち位置は <strong>動作するサンプルを書きながら設計を改善する活動</strong> でありソフトウェア品質という面ではどこか一歩引いていたことを自覚できた。</p>
+</div>
+<div class="paragraph">
+<p>つまり <strong>やはり俺のテスト駆動開発は動作するサンプルを書きながら設計を改善する活動だった</strong> ことを明確に意識することが出来た一方で <strong>やはり俺のテスト駆動開発における品質に対する意識は低かった</strong> のである。今後の課題として取り組みたい。あと、レガシーコード改善ガイドでは改善手順のなかでそのまま <strong>テスト駆動開発</strong> を使うと記述されているのでテスト駆動開発はなにも新規開発だけで使える開発手法ではないという知見も今後広まっていくのではないかと思った。</p>
 </div>
 </div>
 </div>
@@ -1669,7 +1688,10 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://togetter.com/li/1468955">togetter</a></p>
+<p><a href="https://agile459.connpass.com/event/161044/" target="_blank" rel="noopener">TDD Boot Camp in 愛媛 #1</a></p>
+</li>
+<li>
+<p><a href="https://togetter.com/li/1468955" target="_blank" rel="noopener">togetter</a></p>
 </li>
 </ul>
 </div>
@@ -1678,7 +1700,7 @@ suite(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-02-18 17:30:02 JST
+Last updated 2020-02-18 18:27:06 JST
 </div>
 </div>
 <script type="text/x-mathjax-config">
