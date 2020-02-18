@@ -1,21 +1,592 @@
 :toc: left
 :toclevels: 5
 :sectnums:
+:source-highlighter: coderay
 
 = TDD Boot Camp in 愛媛 ふりかえり
 
 == 基調講演
 
+* テスト駆動開発とは何か
+** やはり俺のテスト駆動開発に対する理解は間違っていなかった。
+** 新たな気付き
+**** テスト駆動開発で言及されているリファクタリングとマーティンファウラーのリファクタリングではサイズ感が違う
+* ライブコーディング
+** お題はFizzBuzz問題
+** 内容は https://channel9.msdn.com/Events/de-code/2017/DO03?ocid=player[50 分でわかるテスト駆動開発] を視聴していたので流れは大体知っていた。
+** お題からTODOに落とし込むあたりの作業が動画の時よりパワーアップしていた
+* シンプルなプログラムを通して説明する保守運用のつらみ
+** 動く仕様書としてのテスト
+* 抽象から具体へ具体から抽象へ
+
 == TDD&ペアプログラミング　デモ
+
+* オーソドックスなペアプログラミング
+* TDDBCでありがちなキーボードとキーバインドの問題
 
 == TDD&ペアプログラミング 実習(1回目)
 
+=== 仕様
+
+ 整数閉区間を示すクラス（あるいは構造体）をつくりたい。整数閉区間オブジェクトは下端点と上端点を持ち、文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。ただし、上端点より下端点が大きい閉区間を作ることはできない。整数の閉区間は指定した整数を含むかどうかを判定できる。また、別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+
+ 整数閉区間オブジェクトは下端点と上端点を持ち、
+ 文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。
+ ただし、
+ 上端点より下端点が大きい閉区間を作ることはできない。
+ 整数の閉区間は指定した整数を含むかどうかを判定できる。
+ また、
+ 別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+ 整数閉区間を示すクラス（あるいは構造体）をつくりたい。
+
+=== TODOリスト
+
+* [ ] 整数区間オブジェクトを作る
+** [ ] 下端点と上端点を持つ 
+* [ ] 文字列表現も返す
+** [ ] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+
+=== 仮実装
+
+[source, javascript]
+----
+const assert = chai.assert;
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      assert.equal("[3,8]", ClosedRange.stringify());
+    });
+  });
+});
+
+class ClosedRange {
+  static stringify() {
+    return "[3,8]";
+  }
+}
+----
+
+=== 三角測量
+
+* [ ] 整数区間オブジェクトを作る
+** [ ] 下端点と上端点を持つ 
+* [ ] 文字列表現も返す
+** [x] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+** [ ] 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す
+
+[source, javascript]
+----
+const assert = chai.assert;
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}
+----
+
+=== リファクタリング 
+
+* [x] 整数区間オブジェクトを作る
+** [x] 下端点と上端点を持つ 
+* [x] 文字列表現も返す
+** [x] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+** [x] 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す
+
+[source, javascript]
+----
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      closedRange = new ClosedRange(3, 8); //<1>
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      closedRange = new ClosedRange(4, 9); //<2>
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+----
+
+(1),(2) JavaScriptだとグローバル変数制限になる
+
+[source, javascript]
+----
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8); <1>
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9); <2>
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});
+----
+
+(1),(2) `const` で再代入不可のローカル変数にリファクタリングする
+
+
+- Conventional Commits
+
 == TDD&ペアプログラミング 実習(2回目)
+
+=== 仕様
+
+ ただし、
+ 上端点より下端点が大きい閉区間を作ることはできない。
+ 整数の閉区間は指定した整数を含むかどうかを判定できる。
+ また、
+ 別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+ 整数閉区間を示すクラス（あるいは構造体）をつくりたい。
+
+=== TODOリスト
+
+* [ ] 上端点より下端点が大きい閉区間を作ることはできない
+** [ ] 下端点 8, 上端点 3 ならばエラーが発生する
+
+=== 仮実装を経て明白な実装へ 
+
+[source, javascript]
+----
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3); // <1>
+      }, "作れません");
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません"); // <2>
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}
+----
+
+=== リファクタリング
+
+* [x] 上端点より下端点が大きい閉区間を作ることはできない
+** [x] 下端点 8, 上端点 3 ならばエラーが発生する
+* [x] 整数の閉区間は指定した整数を含むかどうかを判定できる
+** [x] 閉区間[3,8]の場合、3ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、8ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、6ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、2ならは含まれないと判定(false)される
+
+[source, javascript]
+----
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); // <1>
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); // <2>
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); // <3>
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      const closedRange = new ClosedRange(3, 8); // <4>
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません");
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+  }
+}
+----
+
+[source, javascript]
+----
+...
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    let closedRange;
+    setup("前準備", () => { // <5>
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});
+----
 
 == コードレビュー(1回目)
 
+* [x] 文字列表現も返す
+** [x] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+** [x] 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す
+* [x] 整数区間オブジェクトを作る
+** [x] 下端点と上端点を持つ
+* [x] 上端点より下端点が大きい閉区間を作ることはできない
+** [x] 下端点 8, 上端点 3 ならばエラーが発生する
+* [x] 整数の閉区間は指定した整数を含むかどうかを判定できる
+** [x] 閉区間[3,8]の場合、3ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、8ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、6ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、2ならは含まれないと判定(false)される
+* [ ] 別の閉区間と等価かどうか判定できる
+** [ ] 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される
+** [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+* [ ] 別の閉区間に完全に含まれるかどうかも判定できる
+** [ ] 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される
+** [ ] 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される
+
+[source, javascript]
+----
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => { // <1>
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6)); // <2>
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される", () => {
+      const closedRange2 = new ClosedRange(3, 8); // <3>
+      assert.isTrue(closedRange.equal(closedRange2));
+    });
+    // - [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません"); // <4>
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) { // <5>
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+  }
+
+  equal(other) {
+    if (this._lower === other._lower && this._upper === this._upper) // <6>
+      return true;
+    return false;
+  }
+}
+----
+
+- nullの場合
+- テスト技法
+- 小数の扱い
+- 値オブジェクト
+- 読みづらい判定条件
+
 == TDD&ペアプログラミング 実習(2回目)
+
+=== 仕様
+
+ また、
+ 別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+ 整数閉区間を示すクラス（あるいは構造体）をつくりたい。
+
+=== TODOリスト
+
+* [x] 別の閉区間と等価かどうか判定できる
+** [x] 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される
+** [x] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+* [ ] 別の閉区間に完全に含まれるかどうかも判定できる
+** [ ] 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される
+** [ ] 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される
+
+=== リファクタリング
+
+[source, javascript]
+----
+...
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+...
+----
+
+[source, javascript]
+----
+...
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+...
+----
+
+[source, javascript]
+----
+...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+...
+class ClosedRange {
+....
+  isInRange(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+...
+----
+
+[source, javascript]
+----
+...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.include(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.include(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.include(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.include(2));
+    });
+  });
+...
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+class ClosedRange {
+...
+  include(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+...
+----
+
+[source, javascript]
+----
+...
+  include(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+...
+----
+
+[source, javascript]
+----
+...
+  include(number) {
+    if (this._lower <= number && number <= this._upper) {
+      return true;
+    }
+    return false;
+...
+----
+
+=== リリース
+
+* [x] 文字列表現も返す
+** [x] 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す
+** [x] 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す
+* [x] 整数区間オブジェクトを作る
+** [x] 下端点と上端点を持つ
+
+* [x] 上端点より下端点が大きい閉区間を作ることはできない
+** [x] 下端点 8, 上端点 3 ならばエラーが発生する
+* [x] 整数の閉区間は指定した整数を含むかどうかを判定できる
+** [x] 閉区間[3,8]の場合、3ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、8ならは含まれると判定(true)される
+** [x] 閉区間[3,8]の場合、9ならは含まれると判定(false)される
+** [x] 閉区間[3,8]の場合、2ならは含まれないと判定(false)される
+
+* [x] 別の閉区間と等価かどうか判定できる
+** [x] 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される
+** [x] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+* [x] 別の閉区間に完全に含まれるかどうかも判定できる
+** [x] 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される
+** [x] 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される
+
+* 後で考える
+** [ ] nullやundefinedの場合
+** [ ] 小数の場合
+
+[plantuml]
+----
+class ClosedRange {
+  _lower
+  _upper
+  stringfy()
+  include(number)
+  equal(other)
+  includeObject(object)
+}
+----
+
+[source, javascript]
+----
+include::../../../src/app/closed_range.test.js[]
+----
+
+[source, javascript]
+----
+include::../../../src/app/closed_range.js[]
+----
+
+https://tdd-bc-ehime.k2works.now.sh/[zeit.co^]
 
 == コードレビュー(2回目)
 
+- テストケースの構造でレビューをする
+- リーダブルコード
+
 == クロージング
+
+- レガシーコード改善ガイドはStack Overflow参照No1
+- やはり俺のペアプログラミングは間違っている
+- やはり俺のテスト駆動開発は動作するサンプルを書きながら設計を改善する活動だった
+- やはり俺のテスト駆動開発における品質に対する意識は低かった
+
+== 参照
+
+- https://togetter.com/li/1468955[togetter]
