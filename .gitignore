@@ -107,3 +107,4 @@ dist
 
 public
 .DS_Store
+.gradle
