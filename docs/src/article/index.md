@@ -1,361 +1,753 @@
-# エピソード1
+# 基調講演
 
-# Hello World
+お約束の [アレ](https://twitter.com/ramusara/status/1228485948050042881)
+から始まり、最初のテスト駆動開発とは何かというお話の内容としては自分が実践してきたテスト駆動開発と認識のズレはなかったので良かった。
+[勉強会](https://hiroshima-arc.connpass.com/) を実施したり
+[テスト駆動開発の記事](https://qiita.com/k2works/items/83741e3e2d2579d748d6)
+を書いて専門学校の講義に使ったりしてきたけど　**やはり俺のテスト駆動開発に対する理解は間違っていなかった**
+ようだ。ただ、**テスト駆動開発で言及されているリファクタリングとマーティンファウラーの
+[リファクタリング](https://www.amazon.co.jp/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-%E6%97%A2%E5%AD%98%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E6%94%B9%E5%96%84%E3%81%99%E3%82%8B%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89-%EF%BC%AD%EF%BD%81%EF%BD%92%EF%BD%94%EF%BD%89%EF%BD%8E%EF%BC%A6%EF%BD%8F%EF%BD%97%EF%BD%8C%EF%BD%85%EF%BD%92-ebook/dp/B0827R4BDW/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0&qid=1582016208&s=digital-text&sr=1-1)
+ではサイズ感が違う** というのは新しい気づきだった。
 
-## 仕様
+続いて、ライブコーディングのお題は
+**[FizzBuzz問題](https://ja.wikipedia.org/wiki/Fizz_Buzz)** 。 内容は [50
+分でわかるテスト駆動開発](https://channel9.msdn.com/Events/de-code/2017/DO03?ocid=player)
+を以前視聴していたので流れは大体知っていたけどお題からTODOに落とし込むあたりの作業が動画の時よりバージョンアップしていてよりわかりやすい流れになっていた。後半のシンプルなFizzBuzzプログラムを使った保守運用に向けた解説は実際に現場で起きている問題を反映しているのだと思うと興味深い内容だった。このへんが
+[レガシーコード改善ガイド](https://www.shoeisha.co.jp/book/detail/9784798116839)
+へとつながっていくのかなと個人的に思った。
 
-## 設計
+ライブコーディングの内容として自分は **抽象から具体へ具体から抽象へ** を小さなサイクルで何度も回しているなという印象を受けた。自分も最近は
+**抽象と具体**
+の往復は意識しているのだがやはり上手な人が実際にやるのを見れるのは実に学びがある。こればかりは文章ではなかなか伝えられないのよね。
 
-### TODOリスト
+# TDD&ペアプログラミング　デモ
 
-  - ❏ TODO
+> ペアプログラミング（英: pair
+> programming）は、2人のプログラマが1台のワークステーションを使って共同でソフトウェア開発を行う手法という説明が起源である。一方が単体テストを打ち込んでいるときに、もう一方がそのテストを通るクラスについて考えるといったように、相補的な作業をする。プログラム開発の現場では、一人で複数台を同時に使ったり、一台に複数台のディスプレイを使うことも多くなり、具体的なやり方は変わっている。
+> 
+> 実際にキーボードを操作してコードを書く人を「ドライバ」、もう1人を「ナビゲータ」と呼ぶ。30分ごとか、単体テストを1つ完成させる度に役割を交替するのがよいとされる。また、1日に一度の頻度でパートナーを変えるのがよいともされている。
+> 
+> —  Wikipedia 
 
-  - ✓ TODO DONE
+実演でもドライバ交代時にUS配列キーボードで戸惑うなど **ペアプロあるある**
+が見受けられた。ちなみに自分のメイン開発環境はVSCodeにVimキーバインドなのでペアがVimerでもないかぎり間違いなく戸惑うと思う。幸いペアの方が
+[Visual Studio Live
+Share](https://docs.microsoft.com/ja-jp/visualstudio/liveshare/)
+をVSCodeで使ってもオッケーとのことだったのでその辺の問題は回避できた。
 
-### ユースケース図
+# TDD&ペアプログラミング 実習(1回目)
 
-    left to right direction
-    skinparam packageStyle rectangle
-    actor customer
-    actor clerk
-    rectangle checkout {
-      customer -- (checkout)
-      (checkout) .> (payment) : include
-      (help) .> (checkout) : extends
-      (checkout) -- clerk
-    }
-
-### クラス図
-
-    class Car
-    Driver - Car : drives >
-    Car *- Wheel : have 4 >
-    Car -- Person : < owns
-
-### シーケンス図
-
-    participant User
-    User -> A: DoWork
-    activate A
-    A -> B: << createRequest >>
-    activate B
-    B -> C: DoWork
-    activate C
-    C --> B: WorkDone
-    destroy C
-    B --> A: RequestCreated
-    deactivate B
-    A -> User: Done
-    deactivate A
-
-## 開発
-
-## 参照
-
-  - [PlantUML](http://plantuml.com)
-
-## エピソード2
-
-# Fizz Buzz
+午後からペアプログラミングによるテスト駆動開発の実践に入るわけだけど、今回自分が選択した言語は `JavaScript`
+でテスティングフレームワークには `Mocha`
+を使った構成でやった。表記スタイルをTDDにしているのでBDDスタイルとは違うけどあしからず。以下コードがたくさん出てくるけど、これは
+**プログラミングの速さを競うのではなく、テストを書いて動かすことによるフィードバックを受けながら、リファクタリングを忘れず着実に進めていく**
+演習の目的をできるだけ伝えようとしたらこうなってしまったわけであり結論だけ知りたいならばここは読み飛ばして **クロージング**
+へ。まあ、個人的にはここがテスト駆動開発のキモだと思ってるけど・・・
 
 ## 仕様
 
-### Api
+最初にお題だけど今回は `整数の区間`。調べたら [過去にも取り上げられたお題](http://devtesting.jp/tddbc/)
+みたい。
 
-1 から 100 までの数をプリントするプログラムを書け。
+    整数閉区間を示すクラス（あるいは構造体）をつくりたい。整数閉区間オブジェクトは下端点と上端点を持ち、文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。ただし、上端点より下端点が大きい閉区間を作ることはできない。整数の閉区間は指定した整数を含むかどうかを判定できる。また、別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
 
-ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、
+ペアと最初に取り組んだのがお題の理解と **TODOリスト** への分割。とりあえず `ただし、` や `また、` といった接続詞ごとに分割して
+**プログラミングしやすいところから組むようにした。**
 
-3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+    整数閉区間オブジェクトは下端点と上端点を持ち、
+    文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。
+    ただし、
+    上端点より下端点が大きい閉区間を作ることはできない。
+    整数の閉区間は指定した整数を含むかどうかを判定できる。
+    また、
+    別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+    整数閉区間を示すクラス（あるいは構造体）をつくりたい。
 
-タイプごとに出力を切り替えることができる。
+## TODOリスト
 
-タイプ１は通常、タイプ２は数字のみ、タイプ３は FizzBuzz の場合のみをプリントする。
+最初に作った **TODOリスト** がこちら。
 
-### クライアント
-
-1から100までを１件ずつ画面に表示できる。
-
-1から100まで表示された内容を表示できる。
-
-## 設計
-
-### TODOリスト
-
-#### Api
-
-  - ✓ タイプ1の場合
-
-  - ✓ 数を文字列にして返す
-
-  - ✓ 1を渡したら文字列"1"を返す
-
-  - ✓ 2を渡したら文字列"2"を返す
-
-  - ✓ 3 の倍数のときは数の代わりに｢Fizz｣と返す
-
-  - ✓ 3を渡したら文字列"Fizz"を返す
-
-  - ✓ 5 の倍数のときは｢Buzz｣と返す
-
-  - ✓ 5を渡したら文字列"Buzz"を返す
-
-  - ✓ 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
-
-  - ✓ 15を渡したら文字列"FizzBuzz"を返す
-
-  - ✓ タイプ2の場合
-
-  - ✓ 数を文字列にして返す
-
-  - ✓ 1を渡したら文字列"1"を返す
-
-  - ✓ 2を渡したら文字列"2"を返す
-
-  - ✓ 3 の倍数のときは数を文字列にして返す
-
-  - ✓ 3を渡したら文字列"3"を返す
-
-  - ✓ 5 の倍数のときは数を文字列にして返す
-
-  - ✓ 5を渡したら文字列"5"を返す
-
-  - ✓ 3 と 5 両方の倍数の場合には数を文字列にして返す
-
-  - ✓ 15を渡したら文字列"15"を返す
-
-  - ✓ タイプ3の場合
-
-  - ✓ 数を文字列にして返す
-
-  - ✓ 1を渡したら文字列"1"を返す
-
-  - ✓ 2を渡したら文字列"2"を返す
-
-  - ✓ 3 の倍数のときは数を文字列にして返す
-
-  - ✓ 3を渡したら文字列"3"を返す
-
-  - ✓ 5 の倍数のときは数を文字列にして返す
-
-  - ✓ 5を渡したら文字列"5"を返す
-
-  - ✓ 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
-
-  - ✓ 15を渡したら文字列"FizzBuzz"を返す
-
-  - ✓ それ以外のタイプの場合
-
-  - ✓ 例外を返す
-
-#### クライアント
-
-  - ✓ カウンター画面
-
-  - ✓ 画面イメージを作る
-
-  - ✓ APIサービスを作る
-
-  - ✓ APIサービスと連携するクライアントサービスを作る
-
-  - ✓ 正常系を実装する
-
-  - ✓ UIを作る
-
-  - ✓ UIとクライアントサービスを連携する
-
-  - ✓ 一覧表示画面
-
-  - ✓ 画面イメージを作る
-
-  - ✓ APIサービスを作る
-
-  - ✓ APIサービスと連携するクライアントサービスを作る
-
-  - ✓ 正常系を実装する
-
-  - ✓ UIを作る
-
-  - ✓ UIとクライアントサービスを連携する
-
-### ユースケース図
-
-### クラス図
-
-    package Application {
-      package Service {
-        class FizzBuzzService {
-          String generate()
-          String generate_list()
-        }
-        interface FizzBuzzCommand {
-          execute()
-        }
+  - ❏ 整数区間オブジェクトを作る
     
-        class FizzBuzzValueCommand {
-          FizzBuzzType type
-          FizzBuzzValue execute()
-        }
+      - ❏ 下端点と上端点を持つ
+
+  - ❏ 文字列表現も返す
     
-        class FizzBuzzListCommand {
-          FizzBuzzType type
-          FizzBuzzList execute()
-        }
-      }
-    }
-    
-    package Domain {
-        package Model {
-          class FizzBuzzValue {
-            Integer number
-            String value
-            boolean eql()
-          }
-    
-          class FizzBuzzList {
-            MAX_COUNT = 100
-            ArrayList list
-            FizzBuzzList add()
-          }
-        }
-    
-        package Type {
-          class FizzBuzzType {
-            TYPE_01 = 1
-            TYPE_02 = 2
-            TYPE_03 = 3
-            FizzBuzzType {static} create()
-            Boolean is_fizz()
-            Boolean is_buzz()
-            String generate()
-          }
-    
-          class FizzBuzzType01 {
-            String generate()
-          }
-    
-          class FizzBuzzType02 {
-            String generate()
-          }
-    
-          class FizzBuzzType03 {
-            String generate()
-          }
-        }
-    }
-    
-    package Presentation {
-      class FizzBuzzApiService {
-        apiUrl
-        generate()
-        generateList()
-      }
-    
-      class FizzBuzzView {
-        _service
-        _counterComponent
-        _tableComponent
-        render()
-      }
-    
-      class FizzBuzzCounterComponent {
-        _service
-        _conter
-        _value
-        incrementEvent()
-        decrementEvent()
-        render()
-      }
-    
-      class FizzBuzzTableComponent {
-        _service
-        _list
-        _type
-        changeEvent()
-        render()
-      }
-    }
-    
-    FizzBuzzService -> FizzBuzzCommand
-    FizzBuzzCommand <|-- FizzBuzzValueCommand
-    FizzBuzzCommand <|-- FizzBuzzListCommand
-    FizzBuzzCommand *- FizzBuzzType
-    FizzBuzzType <|-- FizzBuzzType01
-    FizzBuzzType <|-- FizzBuzzType02
-    FizzBuzzType <|-- FizzBuzzType03
-    FizzBuzzType -> FizzBuzzValue
-    FizzBuzzListCommand --> FizzBuzzList
-    FizzBuzzService <--- FizzBuzzApiService
-    FizzBuzzApiService --* FizzBuzzView
-    FizzBuzzView *- FizzBuzzCounterComponent
-    FizzBuzzTableComponent -* FizzBuzzView
+      - ❏ 下端点 3, 上端点 8 ならば文字列"\[3,8\]"を返す
 
-### シーケンス図
+## 仮実装
 
-## 開発
-
-### Application
-
-#### Service
-
-``` ruby
-Unresolved directive in fizz_buzz.adoc - include::../../../api/index.rb[]
-```
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/generate.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/generate_list.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_service.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_command.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_list_command.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_value_command.rb[]
-
-### Domain
-
-#### Modle
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/model/fizz_buzz_list.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/model/fizz_buzz_value.rb[]
-
-#### Type
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_01.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_02.rb[]
-
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_03.rb[]
-
-### Presentation
+最初に失敗するコードを書いたらまずは **仮実装** でテストをパスするベタ書きのコードを書いた。 クラスを作りたいとのことだけど
+`JavaScript` で `class` キーワードを使うのは人によってはアレなんだけどペアの人は使ってもオッケーな人だったので
+`class` キーワードで実装した。これが `function` による実装なら、それはそれで面白かったかも。
 
 ``` javascript
-Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzApiService.js[]
+mocha.setup("tdd");
+
+const assert = chai.assert;
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      assert.equal("[3,8]", ClosedRange.stringify());
+    });
+  });
+});
+
+class ClosedRange {
+  static stringify() {
+    return "[3,8]";
+  }
+}
 ```
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzView.js[]
+## 三角測量
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzCounterComponent.js[]
+**仮実装** で **TODOリスト** を一つ片付けたけどコードはベタ書きのまま・・・ここは **三角測量**
+を実施してメソッドの一般化を進めることにした。まず、 **TODOリスト**
+を追加する。
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzTableComponent.js[]
+  - ❏ 整数区間オブジェクトを作る
+    
+      - ❏ 下端点と上端点を持つ
 
-### Test
+  - ❏ 文字列表現も返す
+    
+      - ✓ 下端点 3, 上端点 8 ならば文字列"\[3,8\]"を返す
+    
+      - ❏ 下端点 4, 上端点 9
+ならば文字列"\[4,9\]"を返す
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_list_command_test.rb[]
+追加テストが失敗(レッド)からベタ書きのコードを変更してテスト成功（グリーン）へ。ちなみにこの間８分ごとに交代しながらペアプログラミングしてるけどナビゲーター役の時もなんだかんだで脳内コーディングして活発に意見交換してた。
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_value_command_test.rb[]
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_service_test.rb[]
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});
 
-    Unresolved directive in fizz_buzz.adoc - include::../../../test/FizzBuzzApiService.test.js[]
+class ClosedRange {
+  constructor(lower, upper) {
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}
+```
 
-## 参照
+## リファクタリング
 
-  - [Asciidoctor](http://asciidoctor.org/)
+最初の **TODOリスト** が片付いたのでここで一息ついて **リファクタリング** に取り組む。
 
-  - [PlantUML](http://www.plantuml.com)
+  - ✓ 整数区間オブジェクトを作る
+    
+      - ✓ 下端点と上端点を持つ
+
+  - ✓ 文字列表現も返す
+    
+      - ✓ 下端点 3, 上端点 8 ならば文字列"\[3,8\]"を返す
+    
+      - ✓ 下端点 4, 上端点 9 ならば文字列"\[4,9\]"を返す
+
+以下のコード部分は私が書いた部分だけど、おわかりいただけただろうか？
+
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      closedRange = new ClosedRange(3, 8); 
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      closedRange = new ClosedRange(4, 9); 
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+```
+
+(1),(2) の部分はJavaScriptだとグローバル変数宣言になる！ `JavaScript`
+の中でもトップレベルのあかんやつやらかしたけどペアの指摘のおかげで早期発見早期対応ができた。言い訳だけど最近は
+`Ruby` のコードばかり書いていたので変数もその感覚で書いてた。
+
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8); 
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9); 
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});
+```
+
+(1),(2) は `const` で再代入不可のローカル変数にリファクタリングする。
+
+あと、今回はバージョン管理システムを使って作業を進めているんだけどすでにこの時点で６回ぐらいコミットしてる。コミットメッセージに `test`
+とか `refactor` とかつけてやってるんだけどこれは [Conventional
+Commits](https://www.conventionalcommits.org/ja/v1.0.0/)
+という仕様があるそうだ、初めて知った。
+
+# TDD&ペアプログラミング 実習(2回目)
+
+## 仕様
+
+最初のグループをプログラムに実装したので次のグループに取り組む。
+
+    ただし、
+    上端点より下端点が大きい閉区間を作ることはできない。
+    整数の閉区間は指定した整数を含むかどうかを判定できる。
+    また、
+    別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+    整数閉区間を示すクラス（あるいは構造体）をつくりたい。
+
+## TODOリスト
+
+**TODOリスト** は前回のパターンの踏襲しつつとりあえず例外を投げる実装にしてみる。
+
+  - ❏ 上端点より下端点が大きい閉区間を作ることはできない
+    
+      - ❏ 下端点 8, 上端点 3 ならばエラーが発生する
+
+## 仮実装から実装へ
+
+(1) でまず期待する振る舞いを書いて失敗する（レッド）ことを確認したら、(2)
+のコンストラクタ作成時に例外を投げるようにしてテストを成功させる（グリーン）。
+
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3); 
+      }, "作れません");
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません"); 
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}
+```
+
+例外メッセージが **作れません** とか・・・ちょっとアレだけどもう少し全体のイメージができたてから **リファクタリング** しよう。
+
+## リファクタリング
+
+その後、さらに **TODOリスト** を追加してコードに落とし込んでいったのでここで **リファクタリング** の時間に入る。
+
+  - ✓ 上端点より下端点が大きい閉区間を作ることはできない
+    
+      - ✓ 下端点 8, 上端点 3 ならばエラーが発生する
+
+  - ✓ 整数の閉区間は指定した整数を含むかどうかを判定できる
+    
+      - ✓ 閉区間\[3,8\]の場合、3ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、8ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、6ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、2ならは含まれないと判定(false)される
+
+<!-- end list -->
+
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); 
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); 
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      const closedRange = new ClosedRange(3, 8); 
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      const closedRange = new ClosedRange(3, 8); 
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません");
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+  }
+}
+```
+
+(1),(2),(3),(4)の部分でインスタンスの作成が重複しているのでここは **メソッドの抽出**
+を使って呼び出しを一箇所にまとめることにした。
+
+``` javascript
+...
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    let closedRange;
+    setup("前準備", () => { 
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});
+```
+
+テストコードも壊れていないのでここでバージョン管理システムにコミットしてコードレビューに入る。
+
+# コードレビュー(1回目)
+
+光栄にもコードレビュー１回目の代表に指名していただいたのでありがたくレビューを受けることにした。
+
+## TODOリスト
+
+  - ✓ 文字列表現も返す
+    
+      - ✓ 下端点 3, 上端点 8 ならば文字列"\[3,8\]"を返す
+    
+      - ✓ 下端点 4, 上端点 9 ならば文字列"\[4,9\]"を返す
+
+  - ✓ 整数区間オブジェクトを作る
+    
+      - ✓ 下端点と上端点を持つ
+
+  - ✓ 上端点より下端点が大きい閉区間を作ることはできない
+    
+      - ✓ 下端点 8, 上端点 3 ならばエラーが発生する
+
+  - ✓ 整数の閉区間は指定した整数を含むかどうかを判定できる
+    
+      - ✓ 閉区間\[3,8\]の場合、3ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、8ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、6ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、2ならは含まれないと判定(false)される
+
+  - ❏ 別の閉区間と等価かどうか判定できる
+    
+      - ❏ 閉区間\[3,8\]と閉区間\[3,8\]の場合、等価と判定(true)される
+    
+      - ❏ 閉区間\[3,8\]と閉区間\[4,8\]の場合、等価ではないと判定(false)される
+
+  - ❏ 別の閉区間に完全に含まれるかどうかも判定できる
+    
+      - ❏ 閉区間\[3,8\]と閉区間\[4,7\]の場合、完全に含まれると判定(true)される
+    
+      - ❏ 閉区間\[3,8\]と閉区間\[1,2\]の場合、完全に含まれてないと判定(false)される
+
+進捗状況は7割といったところ。
+
+## コード
+
+``` javascript
+suite("ClosedRangeTest", () => {
+  suite("文字列表現を返す", () => { 
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () => {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () => {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () => {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () => {
+      assert.throws(() => {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6)); 
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+    let closedRange;
+    setup("前準備", () => {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される", () => {
+      const closedRange2 = new ClosedRange(3, 8); 
+      assert.isTrue(closedRange.equal(closedRange2));
+    });
+    // - [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower > upper) {
+      throw new Error("作れません"); 
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) { 
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+  }
+
+  equal(other) {
+    if (this._lower === other._lower && this._upper === this._upper)
+      return true;
+    return false;
+  }
+}
+```
+
+## レビュー
+
+主要なレビュー指摘事項は
+
+  - nullの場合のテストケースが考慮されていない (1)
+
+  - 境界値テストとして境界値内のテストは不要で境界値外テストが不足している (2)
+
+  - 整数以外の値（小数）が渡された場合のテストケースが考慮されていない (3)
+
+  - メソッドの名としてイメージがしずらい (5)
+
+  - 範囲判定条件が分かりづらい (5)
+
+(4) に関しては **値オブジェクト**
+の生成パターンを意識していたのだけど例外を投げるパターンは設計アプローチの一つとして議論した。普段、ボッチ開発している自分としては人様からまさかりを投げていただくというありがたい経験ができた。
+
+# TDD&ペアプログラミング 実習(3回目)
+
+## 仕様
+
+コードレビューも終わり最後の機能の実装に入る。
+
+    また、
+    別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+    整数閉区間を示すクラス（あるいは構造体）をつくりたい。
+
+## TODOリスト
+
+  - ✓ 別の閉区間と等価かどうか判定できる
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[3,8\]の場合、等価と判定(true)される
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[4,8\]の場合、等価ではないと判定(false)される
+
+  - ❏ 別の閉区間に完全に含まれるかどうかも判定できる
+    
+      - ❏ 閉区間\[3,8\]と閉区間\[4,7\]の場合、完全に含まれると判定(true)される
+    
+      - ❏
+閉区間\[3,8\]と閉区間\[1,2\]の場合、完全に含まれてないと判定(false)される
+
+## リファクタリング
+
+では機能を追加してリリース！と思っていたけどペアにまずはリファクタリングと指摘されてはっと我に返る。意識はしているんだけどついつい機能を作る方に意識が行ってしまうのでこのような指摘は非常にありがたい。まずはコードレビュー指摘事項から取り組むことにする。
+
+このテストケースは境界値テストとしては不要なので
+
+``` javascript
+...
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+...
+```
+
+不要なテストを不足するテストに変更する。
+
+``` javascript
+...
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+...
+```
+
+次に指摘された `isInRange` メソッドだけど
+
+``` javascript
+...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+...
+class ClosedRange {
+....
+  isInRange(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+...
+```
+
+ここは `include` にメソッド名を変更する。
+
+``` javascript
+...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.include(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () => {
+      assert.isTrue(closedRange.include(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () => {
+      assert.isFalse(closedRange.include(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () => {
+      assert.isFalse(closedRange.include(2));
+    });
+  });
+...
+  suite(" 別の閉区間と等価かどうか判定できる", () => {
+class ClosedRange {
+...
+  include(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+...
+```
+
+範囲判定の部分も比較演算子が反転すると可読性が下がるので
+
+``` javascript
+...
+  include(number) {
+    if (this._lower <= number && this._upper >= number) {
+      return true;
+    }
+    return false;
+...
+```
+
+\(3 \leq X \leq 8\) のように読めるように変更する。
+
+``` javascript
+...
+  include(number) {
+    if (this._lower <= number && number <= this._upper) {
+      return true;
+    }
+    return false;
+...
+```
+
+## リリース
+
+なんとか時間内に仕様を満たすプログラムを作ることが出来た。
+
+### TODOリスト
+
+  - ✓ 文字列表現も返す
+    
+      - ✓ 下端点 3, 上端点 8 ならば文字列"\[3,8\]"を返す
+    
+      - ✓ 下端点 4, 上端点 9 ならば文字列"\[4,9\]"を返す
+
+  - ✓ 整数区間オブジェクトを作る
+    
+      - ✓ 下端点と上端点を持つ
+
+  - ✓ 上端点より下端点が大きい閉区間を作ることはできない
+    
+      - ✓ 下端点 8, 上端点 3 ならばエラーが発生する
+
+  - ✓ 整数の閉区間は指定した整数を含むかどうかを判定できる
+    
+      - ✓ 閉区間\[3,8\]の場合、3ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、8ならは含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]の場合、9ならは含まれると判定(false)される
+    
+      - ✓ 閉区間\[3,8\]の場合、2ならは含まれないと判定(false)される
+
+  - ✓ 別の閉区間と等価かどうか判定できる
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[3,8\]の場合、等価と判定(true)される
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[4,8\]の場合、等価ではないと判定(false)される
+
+  - ✓ 別の閉区間に完全に含まれるかどうかも判定できる
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[4,7\]の場合、完全に含まれると判定(true)される
+    
+      - ✓ 閉区間\[3,8\]と閉区間\[1,2\]の場合、完全に含まれてないと判定(false)される
+
+  - 後で考える
+    
+      - ❏ nullやundefinedの場合
+    
+      - ❏ 小数の場合
+
+### クラス図
+
+    class ClosedRange {
+      _lower
+      _upper
+      stringfy()
+      include(number)
+      equal(other)
+      includeObject(object)
+    }
+
+### プログラム
+
+`closed_range.test.js`
+
+``` javascript
+Unresolved directive in index.adoc - include::../../../src/app/closed_range.test.js[]
+```
+
+`closed_range.js`
+
+``` javascript
+Unresolved directive in index.adoc - include::../../../src/app/closed_range.js[]
+```
+
+ついでに　https://tdd-bc-ehime.k2works.now.sh/\[デプロイ^\] してみた。
+
+# コードレビュー(2回目)
+
+コードレビュー２回目は Rubyチームの発表。レビューする立場になってみるとこれはこれで難しいことがわかった。
+あと、プロダクトコードからではなくテストコードを構造化して日本語仕様として読むことでそこからプロダクトコードの問題点を指摘するというアプローチは言語を問わず有効だと思った。
+
+# クロージング
+
+**やはり俺のテスト駆動開発に対する理解は間違っていなかった** という感触をつかめた TDD Boot Campではあったけど
+ペアプログラミングに関しては今まで自分がやっていたのはペアプログラミングではなかった
+**やはり俺のペアプログラミングは間違っている** ので今回の経験を次回から反映していきたい。
+今回は品質に関しても多く言及していたけどその中で自分のテスト駆動開発に対する立ち位置は
+**動作するサンプルを書きながら設計を改善する活動**
+でありソフトウェア品質という面ではどこか一歩引いていたことを自覚できた。
+
+つまり **やはり俺のテスト駆動開発は動作するサンプルを書きながら設計を改善する活動だった** ことを明確に意識することが出来た一方で
+**やはり俺のテスト駆動開発における品質に対する意識は低かった**
+のである。今後の課題として取り組みたい。あと、レガシーコード改善ガイドでは改善手順のなかでそのまま
+**テスト駆動開発**
+を使うと記述されているのでテスト駆動開発はなにも新規開発だけで使える開発手法ではないという知見も今後広まっていくのではないかと思った。
+
+# 参照
+
+  - [TDD Boot Camp in 愛媛
+    \#1](https://agile459.connpass.com/event/161044/)
+
+  - [togetter](https://togetter.com/li/1468955)

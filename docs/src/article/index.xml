@@ -3,431 +3,788 @@
 <?asciidoc-numbered?>
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
-<title>開発ガイド</title>
-<date>2020-02-14</date>
+<title>TDD Boot Camp in 愛媛 ふりかえり</title>
+<date>2020-02-18</date>
 </info>
-<section xml:id="_エピソード1">
-<title>エピソード1</title>
-
+<section xml:id="_基調講演">
+<title>基調講演</title>
+<simpara>お約束の <link xl:href="https://twitter.com/ramusara/status/1228485948050042881">アレ</link> から始まり、最初のテスト駆動開発とは何かというお話の内容としては自分が実践してきたテスト駆動開発と認識のズレはなかったので良かった。 <link xl:href="https://hiroshima-arc.connpass.com/">勉強会</link> を実施したり <link xl:href="https://qiita.com/k2works/items/83741e3e2d2579d748d6">テスト駆動開発の記事</link> を書いて専門学校の講義に使ったりしてきたけど　<emphasis role="strong">やはり俺のテスト駆動開発に対する理解は間違っていなかった</emphasis> ようだ。ただ、<emphasis role="strong">テスト駆動開発で言及されているリファクタリングとマーティンファウラーの <link xl:href="https://www.amazon.co.jp/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-%E6%97%A2%E5%AD%98%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E6%94%B9%E5%96%84%E3%81%99%E3%82%8B%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89-%EF%BC%AD%EF%BD%81%EF%BD%92%EF%BD%94%EF%BD%89%EF%BD%8E%EF%BC%A6%EF%BD%8F%EF%BD%97%EF%BD%8C%EF%BD%85%EF%BD%92-ebook/dp/B0827R4BDW/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;keywords=%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0&amp;qid=1582016208&amp;s=digital-text&amp;sr=1-1">リファクタリング</link> ではサイズ感が違う</emphasis> というのは新しい気づきだった。</simpara>
+<simpara>続いて、ライブコーディングのお題は <emphasis role="strong"><link xl:href="https://ja.wikipedia.org/wiki/Fizz_Buzz">FizzBuzz問題</link></emphasis> 。 内容は <link xl:href="https://channel9.msdn.com/Events/de-code/2017/DO03?ocid=player">50 分でわかるテスト駆動開発</link> を以前視聴していたので流れは大体知っていたけどお題からTODOに落とし込むあたりの作業が動画の時よりバージョンアップしていてよりわかりやすい流れになっていた。後半のシンプルなFizzBuzzプログラムを使った保守運用に向けた解説は実際に現場で起きている問題を反映しているのだと思うと興味深い内容だった。このへんが <link xl:href="https://www.shoeisha.co.jp/book/detail/9784798116839">レガシーコード改善ガイド</link> へとつながっていくのかなと個人的に思った。</simpara>
+<simpara>ライブコーディングの内容として自分は <emphasis role="strong">抽象から具体へ具体から抽象へ</emphasis> を小さなサイクルで何度も回しているなという印象を受けた。自分も最近は <emphasis role="strong">抽象と具体</emphasis> の往復は意識しているのだがやはり上手な人が実際にやるのを見れるのは実に学びがある。こればかりは文章ではなかなか伝えられないのよね。</simpara>
 </section>
-<section xml:id="_hello_world">
-<title>Hello World</title>
+<section xml:id="_tdd_ペアプログラミング_デモ">
+<title>TDD&amp;ペアプログラミング　デモ</title>
+<blockquote>
+<attribution>
+Wikipedia
+</attribution>
+<simpara>ペアプログラミング（英: pair programming）は、2人のプログラマが1台のワークステーションを使って共同でソフトウェア開発を行う手法という説明が起源である。一方が単体テストを打ち込んでいるときに、もう一方がそのテストを通るクラスについて考えるといったように、相補的な作業をする。プログラム開発の現場では、一人で複数台を同時に使ったり、一台に複数台のディスプレイを使うことも多くなり、具体的なやり方は変わっている。</simpara>
+<simpara>実際にキーボードを操作してコードを書く人を「ドライバ」、もう1人を「ナビゲータ」と呼ぶ。30分ごとか、単体テストを1つ完成させる度に役割を交替するのがよいとされる。また、1日に一度の頻度でパートナーを変えるのがよいともされている。</simpara>
+</blockquote>
+<simpara>実演でもドライバ交代時にUS配列キーボードで戸惑うなど <emphasis role="strong">ペアプロあるある</emphasis> が見受けられた。ちなみに自分のメイン開発環境はVSCodeにVimキーバインドなのでペアがVimerでもないかぎり間違いなく戸惑うと思う。幸いペアの方が <link xl:href="https://docs.microsoft.com/ja-jp/visualstudio/liveshare/">Visual Studio Live Share</link> をVSCodeで使ってもオッケーとのことだったのでその辺の問題は回避できた。</simpara>
+</section>
+<section xml:id="_tdd_ペアプログラミング_実習_1回目">
+<title>TDD&amp;ペアプログラミング 実習(1回目)</title>
+<simpara>午後からペアプログラミングによるテスト駆動開発の実践に入るわけだけど、今回自分が選択した言語は <literal>JavaScript</literal> でテスティングフレームワークには <literal>Mocha</literal> を使った構成でやった。表記スタイルをTDDにしているのでBDDスタイルとは違うけどあしからず。以下コードがたくさん出てくるけど、これは <emphasis role="strong">プログラミングの速さを競うのではなく、テストを書いて動かすことによるフィードバックを受けながら、リファクタリングを忘れず着実に進めていく</emphasis> 演習の目的をできるだけ伝えようとしたらこうなってしまったわけであり結論だけ知りたいならばここは読み飛ばして <emphasis role="strong">クロージング</emphasis> へ。まあ、個人的にはここがテスト駆動開発のキモだと思ってるけど・・・</simpara>
 <section xml:id="_仕様">
 <title>仕様</title>
-
+<simpara>最初にお題だけど今回は <literal>整数の区間</literal>。調べたら <link xl:href="http://devtesting.jp/tddbc/">過去にも取り上げられたお題</link> みたい。</simpara>
+<literallayout class="monospaced">整数閉区間を示すクラス（あるいは構造体）をつくりたい。整数閉区間オブジェクトは下端点と上端点を持ち、文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。ただし、上端点より下端点が大きい閉区間を作ることはできない。整数の閉区間は指定した整数を含むかどうかを判定できる。また、別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。</literallayout>
+<simpara>ペアと最初に取り組んだのがお題の理解と <emphasis role="strong">TODOリスト</emphasis> への分割。とりあえず <literal>ただし、</literal> や <literal>また、</literal> といった接続詞ごとに分割して <emphasis role="strong">プログラミングしやすいところから組むようにした。</emphasis></simpara>
+<literallayout class="monospaced">整数閉区間オブジェクトは下端点と上端点を持ち、
+文字列表現も返せる（例: 下端点 3, 上端点 8 の整数閉区間の文字列表記は "[3,8]"）。
+ただし、
+上端点より下端点が大きい閉区間を作ることはできない。
+整数の閉区間は指定した整数を含むかどうかを判定できる。
+また、
+別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+整数閉区間を示すクラス（あるいは構造体）をつくりたい。</literallayout>
 </section>
-<section xml:id="_設計">
-<title>設計</title>
 <section xml:id="_todoリスト">
 <title>TODOリスト</title>
+<simpara>最初に作った <emphasis role="strong">TODOリスト</emphasis> がこちら。</simpara>
 <itemizedlist mark="none">
 <listitem>
-<simpara>&#10063; TODO</simpara>
+<simpara>&#10063; 整数区間オブジェクトを作る</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 下端点と上端点を持つ</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 <listitem>
-<simpara>&#10003; <phrase role="line-through">TODO DONE</phrase></simpara>
+<simpara>&#10063; 文字列表現も返す</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 </itemizedlist>
 </section>
-<section xml:id="_ユースケース図">
-<title>ユースケース図</title>
-<screen>left to right direction
-skinparam packageStyle rectangle
-actor customer
-actor clerk
-rectangle checkout {
-  customer -- (checkout)
-  (checkout) .&gt; (payment) : include
-  (help) .&gt; (checkout) : extends
-  (checkout) -- clerk
-}</screen>
+<section xml:id="_仮実装">
+<title>仮実装</title>
+<simpara>最初に失敗するコードを書いたらまずは <emphasis role="strong">仮実装</emphasis> でテストをパスするベタ書きのコードを書いた。 クラスを作りたいとのことだけど <literal>JavaScript</literal> で <literal>class</literal> キーワードを使うのは人によってはアレなんだけどペアの人は使ってもオッケーな人だったので <literal>class</literal> キーワードで実装した。これが <literal>function</literal> による実装なら、それはそれで面白かったかも。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">mocha.setup("tdd");
+
+const assert = chai.assert;
+suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      assert.equal("[3,8]", ClosedRange.stringify());
+    });
+  });
+});
+
+class ClosedRange {
+  static stringify() {
+    return "[3,8]";
+  }
+}</programlisting>
+</section>
+<section xml:id="_三角測量">
+<title>三角測量</title>
+<simpara><emphasis role="strong">仮実装</emphasis> で <emphasis role="strong">TODOリスト</emphasis> を一つ片付けたけどコードはベタ書きのまま・・・ここは <emphasis role="strong">三角測量</emphasis> を実施してメソッドの一般化を進めることにした。まず、 <emphasis role="strong">TODOリスト</emphasis> を追加する。</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 整数区間オブジェクトを作る</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 下端点と上端点を持つ</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10063; 文字列表現も返す</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara>追加テストが失敗(レッド)からベタ書きのコードを変更してテスト成功（グリーン）へ。ちなみにこの間８分ごとに交代しながらペアプログラミングしてるけどナビゲーター役の時もなんだかんだで脳内コーディングして活発に意見交換してた。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}</programlisting>
+</section>
+<section xml:id="_リファクタリング">
+<title>リファクタリング</title>
+<simpara>最初の <emphasis role="strong">TODOリスト</emphasis> が片付いたのでここで一息ついて <emphasis role="strong">リファクタリング</emphasis> に取り組む。</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 整数区間オブジェクトを作る</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点と上端点を持つ</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 文字列表現も返す</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara>以下のコード部分は私が書いた部分だけど、おわかりいただけただろうか？</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      closedRange = new ClosedRange(3, 8); <co xml:id="CO1-1"/>
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      closedRange = new ClosedRange(4, 9); <co xml:id="CO1-2"/>
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });</programlisting>
+<simpara>(1),(2) の部分はJavaScriptだとグローバル変数宣言になる！ <literal>JavaScript</literal> の中でもトップレベルのあかんやつやらかしたけどペアの指摘のおかげで早期発見早期対応ができた。言い訳だけど最近は <literal>Ruby</literal> のコードばかり書いていたので変数もその感覚で書いてた。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      const closedRange = new ClosedRange(3, 8); <co xml:id="CO1-3"/>
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      const closedRange = new ClosedRange(4, 9); <co xml:id="CO1-4"/>
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+});</programlisting>
+<simpara>(1),(2) は <literal>const</literal> で再代入不可のローカル変数にリファクタリングする。</simpara>
+<simpara>あと、今回はバージョン管理システムを使って作業を進めているんだけどすでにこの時点で６回ぐらいコミットしてる。コミットメッセージに <literal>test</literal> とか <literal>refactor</literal> とかつけてやってるんだけどこれは <link xl:href="https://www.conventionalcommits.org/ja/v1.0.0/">Conventional Commits</link> という仕様があるそうだ、初めて知った。</simpara>
+</section>
+</section>
+<section xml:id="_tdd_ペアプログラミング_実習_2回目">
+<title>TDD&amp;ペアプログラミング 実習(2回目)</title>
+<section xml:id="_仕様_2">
+<title>仕様</title>
+<simpara>最初のグループをプログラムに実装したので次のグループに取り組む。</simpara>
+<literallayout class="monospaced">ただし、
+上端点より下端点が大きい閉区間を作ることはできない。
+整数の閉区間は指定した整数を含むかどうかを判定できる。
+また、
+別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+整数閉区間を示すクラス（あるいは構造体）をつくりたい。</literallayout>
+</section>
+<section xml:id="_todoリスト_2">
+<title>TODOリスト</title>
+<simpara><emphasis role="strong">TODOリスト</emphasis> は前回のパターンの踏襲しつつとりあえず例外を投げる実装にしてみる。</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 上端点より下端点が大きい閉区間を作ることはできない</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 下端点 8, 上端点 3 ならばエラーが発生する</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="_仮実装から実装へ">
+<title>仮実装から実装へ</title>
+<simpara>(1) でまず期待する振る舞いを書いて失敗する（レッド）ことを確認したら、(2) のコンストラクタ作成時に例外を投げるようにしてテストを成功させる（グリーン）。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () =&gt; {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () =&gt; {
+      assert.throws(() =&gt; {
+        new ClosedRange(8, 3); <co xml:id="CO1-5"/>
+      }, "作れません");
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower &gt; upper) {
+      throw new Error("作れません"); <co xml:id="CO1-6"/>
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+}</programlisting>
+<simpara>例外メッセージが <emphasis role="strong">作れません</emphasis> とか・・・ちょっとアレだけどもう少し全体のイメージができたてから <emphasis role="strong">リファクタリング</emphasis> しよう。</simpara>
+</section>
+<section xml:id="_リファクタリング_2">
+<title>リファクタリング</title>
+<simpara>その後、さらに <emphasis role="strong">TODOリスト</emphasis> を追加してコードに落とし込んでいったのでここで <emphasis role="strong">リファクタリング</emphasis> の時間に入る。</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 上端点より下端点が大きい閉区間を作ることはできない</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 8, 上端点 3 ならばエラーが発生する</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 整数の閉区間は指定した整数を含むかどうかを判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、3ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、8ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、6ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、2ならは含まれないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; {
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () =&gt; {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () =&gt; {
+      assert.throws(() =&gt; {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () =&gt; {
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () =&gt; {
+      const closedRange = new ClosedRange(3, 8); <co xml:id="CO1-7"/>
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () =&gt; {
+      const closedRange = new ClosedRange(3, 8); <co xml:id="CO1-8"/>
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () =&gt; {
+      const closedRange = new ClosedRange(3, 8); <co xml:id="CO1-9"/>
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () =&gt; {
+      const closedRange = new ClosedRange(3, 8); <co xml:id="CO1-10"/>
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower &gt; upper) {
+      throw new Error("作れません");
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) {
+    if (this._lower &lt;= number &amp;&amp; this._upper &gt;= number) {
+      return true;
+    }
+    return false;
+  }
+}</programlisting>
+<simpara>(1),(2),(3),(4)の部分でインスタンスの作成が重複しているのでここは <emphasis role="strong">メソッドの抽出</emphasis> を使って呼び出しを一箇所にまとめることにした。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () =&gt; {
+    let closedRange;
+    setup("前準備", () =&gt; { <co xml:id="CO1-11"/>
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+});</programlisting>
+<simpara>テストコードも壊れていないのでここでバージョン管理システムにコミットしてコードレビューに入る。</simpara>
+</section>
+</section>
+<section xml:id="_コードレビュー_1回目">
+<title>コードレビュー(1回目)</title>
+<simpara>光栄にもコードレビュー１回目の代表に指名していただいたのでありがたくレビューを受けることにした。</simpara>
+<section xml:id="_todoリスト_3">
+<title>TODOリスト</title>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 文字列表現も返す</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 整数区間オブジェクトを作る</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点と上端点を持つ</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 上端点より下端点が大きい閉区間を作ることはできない</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 8, 上端点 3 ならばエラーが発生する</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 整数の閉区間は指定した整数を含むかどうかを判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、3ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、8ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、6ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、2ならは含まれないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10063; 別の閉区間と等価かどうか判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10063; 別の閉区間に完全に含まれるかどうかも判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara>進捗状況は7割といったところ。</simpara>
+</section>
+<section xml:id="_コード">
+<title>コード</title>
+<programlisting language="javascript" linenumbering="unnumbered">suite("ClosedRangeTest", () =&gt; {
+  suite("文字列表現を返す", () =&gt; { <co xml:id="CO1-12"/>
+    test("下端点 3, 上端点 8 ならば文字列[3,8]を返す", () =&gt; {
+      const closedRange = new ClosedRange(3, 8);
+      assert.equal("[3,8]", closedRange.stringify());
+    });
+
+    test("下端点 4, 上端点 9 ならば文字列[4,9]を返す", () =&gt; {
+      const closedRange = new ClosedRange(4, 9);
+      assert.equal("[4,9]", closedRange.stringify());
+    });
+  });
+  suite("上端点より下端点が大きい閉区間を作ることはできない", () =&gt; {
+    test("下端点 8, 上端点 3 ならばエラーが発生する", () =&gt; {
+      assert.throws(() =&gt; {
+        new ClosedRange(8, 3);
+      }, "作れません");
+    });
+  });
+  suite("整数の閉区間は指定した整数を含むかどうかを判定できる", () =&gt; {
+    let closedRange;
+    setup("前準備", () =&gt; {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(6)); <co xml:id="CO1-13"/>
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () =&gt; {
+    let closedRange;
+    setup("前準備", () =&gt; {
+      closedRange = new ClosedRange(3, 8);
+    });
+    test("閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される", () =&gt; {
+      const closedRange2 = new ClosedRange(3, 8); <co xml:id="CO1-14"/>
+      assert.isTrue(closedRange.equal(closedRange2));
+    });
+    // - [ ] 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される
+  });
+});
+
+class ClosedRange {
+  constructor(lower, upper) {
+    if (lower &gt; upper) {
+      throw new Error("作れません"); <co xml:id="CO1-15"/>
+    }
+    this._lower = lower;
+    this._upper = upper;
+  }
+  stringify() {
+    let result = `[${this._lower},${this._upper}]`;
+    return result;
+  }
+
+  isInRange(number) { <co xml:id="CO1-16"/>
+    if (this._lower &lt;= number &amp;&amp; this._upper &gt;= number) {
+      return true;
+    }
+    return false;
+  }
+
+  equal(other) {
+    if (this._lower === other._lower &amp;&amp; this._upper === this._upper)
+      return true;
+    return false;
+  }
+}</programlisting>
+</section>
+<section xml:id="_レビュー">
+<title>レビュー</title>
+<simpara>主要なレビュー指摘事項は</simpara>
+<itemizedlist>
+<listitem>
+<simpara>nullの場合のテストケースが考慮されていない (1)</simpara>
+</listitem>
+<listitem>
+<simpara>境界値テストとして境界値内のテストは不要で境界値外テストが不足している (2)</simpara>
+</listitem>
+<listitem>
+<simpara>整数以外の値（小数）が渡された場合のテストケースが考慮されていない (3)</simpara>
+</listitem>
+<listitem>
+<simpara>メソッドの名としてイメージがしずらい (5)</simpara>
+</listitem>
+<listitem>
+<simpara>範囲判定条件が分かりづらい (5)</simpara>
+</listitem>
+</itemizedlist>
+<simpara>(4) に関しては <emphasis role="strong">値オブジェクト</emphasis> の生成パターンを意識していたのだけど例外を投げるパターンは設計アプローチの一つとして議論した。普段、ボッチ開発している自分としては人様からまさかりを投げていただくというありがたい経験ができた。</simpara>
+</section>
+</section>
+<section xml:id="_tdd_ペアプログラミング_実習_3回目">
+<title>TDD&amp;ペアプログラミング 実習(3回目)</title>
+<section xml:id="_仕様_3">
+<title>仕様</title>
+<simpara>コードレビューも終わり最後の機能の実装に入る。</simpara>
+<literallayout class="monospaced">また、
+別の閉区間と等価かどうかや、完全に含まれるかどうかも判定できる。
+整数閉区間を示すクラス（あるいは構造体）をつくりたい。</literallayout>
+</section>
+<section xml:id="_todoリスト_4">
+<title>TODOリスト</title>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 別の閉区間と等価かどうか判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10063; 別の閉区間に完全に含まれるかどうかも判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="_リファクタリング_3">
+<title>リファクタリング</title>
+<simpara>では機能を追加してリリース！と思っていたけどペアにまずはリファクタリングと指摘されてはっと我に返る。意識はしているんだけどついつい機能を作る方に意識が行ってしまうのでこのような指摘は非常にありがたい。まずはコードレビュー指摘事項から取り組むことにする。</simpara>
+<simpara>このテストケースは境界値テストとしては不要なので</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+    test("閉区間[3,8]の場合、6ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(6));
+    });
+...</programlisting>
+<simpara>不要なテストを不足するテストに変更する。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+...</programlisting>
+<simpara>次に指摘された <literal>isInRange</literal> メソッドだけど</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.isInRange(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.isInRange(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.isInRange(2));
+    });
+  });
+  suite(" 別の閉区間と等価かどうか判定できる", () =&gt; {
+...
+class ClosedRange {
+....
+  isInRange(number) {
+    if (this._lower &lt;= number &amp;&amp; this._upper &gt;= number) {
+      return true;
+    }
+...</programlisting>
+<simpara>ここは <literal>include</literal> にメソッド名を変更する。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+    test("閉区間[3,8]の場合、3ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.include(3));
+    });
+    test("閉区間[3,8]の場合、8ならは含まれると判定(true)される", () =&gt; {
+      assert.isTrue(closedRange.include(8));
+    });
+    test("閉区間[3,8]の場合、9ならは含まれると判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.include(9));
+    });
+    test("閉区間[3,8]の場合、2ならは含まれないと判定(false)される", () =&gt; {
+      assert.isFalse(closedRange.include(2));
+    });
+  });
+...
+  suite(" 別の閉区間と等価かどうか判定できる", () =&gt; {
+class ClosedRange {
+...
+  include(number) {
+    if (this._lower &lt;= number &amp;&amp; this._upper &gt;= number) {
+      return true;
+    }
+...</programlisting>
+<simpara>範囲判定の部分も比較演算子が反転すると可読性が下がるので</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+  include(number) {
+    if (this._lower &lt;= number &amp;&amp; this._upper &gt;= number) {
+      return true;
+    }
+    return false;
+...</programlisting>
+<simpara><inlineequation><mathphrase><![CDATA[3 \leq X \leq 8]]></mathphrase></inlineequation> のように読めるように変更する。</simpara>
+<programlisting language="javascript" linenumbering="unnumbered">...
+  include(number) {
+    if (this._lower &lt;= number &amp;&amp; number &lt;= this._upper) {
+      return true;
+    }
+    return false;
+...</programlisting>
+</section>
+<section xml:id="_リリース">
+<title>リリース</title>
+<simpara>なんとか時間内に仕様を満たすプログラムを作ることが出来た。</simpara>
+<section xml:id="_todoリスト_5">
+<title>TODOリスト</title>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 文字列表現も返す</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 3, 上端点 8 ならば文字列"[3,8]"を返す</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 下端点 4, 上端点 9 ならば文字列"[4,9]"を返す</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 整数区間オブジェクトを作る</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点と上端点を持つ</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 上端点より下端点が大きい閉区間を作ることはできない</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 下端点 8, 上端点 3 ならばエラーが発生する</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 整数の閉区間は指定した整数を含むかどうかを判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、3ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、8ならは含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、9ならは含まれると判定(false)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]の場合、2ならは含まれないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 別の閉区間と等価かどうか判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[3,8]の場合、等価と判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[4,8]の場合、等価ではないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#10003; 別の閉区間に完全に含まれるかどうかも判定できる</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[4,7]の場合、完全に含まれると判定(true)される</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 閉区間[3,8]と閉区間[1,2]の場合、完全に含まれてないと判定(false)される</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>後で考える</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; nullやundefinedの場合</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 小数の場合</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
 </section>
 <section xml:id="_クラス図">
 <title>クラス図</title>
-<screen>class Car
-Driver - Car : drives &gt;
-Car *- Wheel : have 4 &gt;
-Car -- Person : &lt; owns</screen>
+<screen>class ClosedRange {
+  _lower
+  _upper
+  stringfy()
+  include(number)
+  equal(other)
+  includeObject(object)
+}</screen>
 </section>
-<section xml:id="_シーケンス図">
-<title>シーケンス図</title>
-<screen>participant User
-User -&gt; A: DoWork
-activate A
-A -&gt; B: &lt;&lt; createRequest &gt;&gt;
-activate B
-B -&gt; C: DoWork
-activate C
-C --&gt; B: WorkDone
-destroy C
-B --&gt; A: RequestCreated
-deactivate B
-A -&gt; User: Done
-deactivate A</screen>
+<section xml:id="_プログラム">
+<title>プログラム</title>
+<simpara><literal>closed_range.test.js</literal></simpara>
+<programlisting language="javascript" linenumbering="unnumbered">Unresolved directive in index.adoc - include::../../../src/app/closed_range.test.js[]</programlisting>
+<simpara><literal>closed_range.js</literal></simpara>
+<programlisting language="javascript" linenumbering="unnumbered">Unresolved directive in index.adoc - include::../../../src/app/closed_range.js[]</programlisting>
+<simpara>ついでに　https://tdd-bc-ehime.k2works.now.sh/[デプロイ^] してみた。</simpara>
 </section>
 </section>
-<section xml:id="_開発">
-<title>開発</title>
-
+</section>
+<section xml:id="_コードレビュー_2回目">
+<title>コードレビュー(2回目)</title>
+<simpara>コードレビュー２回目は Rubyチームの発表。レビューする立場になってみるとこれはこれで難しいことがわかった。
+あと、プロダクトコードからではなくテストコードを構造化して日本語仕様として読むことでそこからプロダクトコードの問題点を指摘するというアプローチは言語を問わず有効だと思った。</simpara>
+</section>
+<section xml:id="_クロージング">
+<title>クロージング</title>
+<simpara><emphasis role="strong">やはり俺のテスト駆動開発に対する理解は間違っていなかった</emphasis> という感触をつかめた TDD Boot Campではあったけど
+ペアプログラミングに関しては今まで自分がやっていたのはペアプログラミングではなかった <emphasis role="strong">やはり俺のペアプログラミングは間違っている</emphasis> ので今回の経験を次回から反映していきたい。
+今回は品質に関しても多く言及していたけどその中で自分のテスト駆動開発に対する立ち位置は <emphasis role="strong">動作するサンプルを書きながら設計を改善する活動</emphasis> でありソフトウェア品質という面ではどこか一歩引いていたことを自覚できた。</simpara>
+<simpara>つまり <emphasis role="strong">やはり俺のテスト駆動開発は動作するサンプルを書きながら設計を改善する活動だった</emphasis> ことを明確に意識することが出来た一方で <emphasis role="strong">やはり俺のテスト駆動開発における品質に対する意識は低かった</emphasis> のである。今後の課題として取り組みたい。あと、レガシーコード改善ガイドでは改善手順のなかでそのまま <emphasis role="strong">テスト駆動開発</emphasis> を使うと記述されているのでテスト駆動開発はなにも新規開発だけで使える開発手法ではないという知見も今後広まっていくのではないかと思った。</simpara>
 </section>
 <section xml:id="_参照">
 <title>参照</title>
 <itemizedlist>
 <listitem>
-<simpara><link xl:href="http://plantuml.com">PlantUML</link></simpara>
+<simpara><link xl:href="https://agile459.connpass.com/event/161044/">TDD Boot Camp in 愛媛 #1</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://togetter.com/li/1468955">togetter</link></simpara>
 </listitem>
 </itemizedlist>
-</section>
-<section xml:id="_エピソード2">
-<title>エピソード2</title>
-
-</section>
-</section>
-<section xml:id="_fizz_buzz">
-<title>Fizz Buzz</title>
-<section xml:id="_仕様_2">
-<title>仕様</title>
-<section xml:id="_api">
-<title>Api</title>
-<simpara>1 から 100 までの数をプリントするプログラムを書け。</simpara>
-<simpara>ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、</simpara>
-<simpara>3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。</simpara>
-<simpara>タイプごとに出力を切り替えることができる。</simpara>
-<simpara>タイプ１は通常、タイプ２は数字のみ、タイプ３は FizzBuzz の場合のみをプリントする。</simpara>
-</section>
-<section xml:id="_クライアント">
-<title>クライアント</title>
-<simpara>1から100までを１件ずつ画面に表示できる。</simpara>
-<simpara>1から100まで表示された内容を表示できる。</simpara>
-</section>
-</section>
-<section xml:id="_設計_2">
-<title>設計</title>
-<section xml:id="_todoリスト_2">
-<title>TODOリスト</title>
-<section xml:id="_api_2">
-<title>Api</title>
-<itemizedlist mark="none">
-<listitem>
-<simpara>&#10003; タイプ1の場合</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 1を渡したら文字列"1"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 2を渡したら文字列"2"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 の倍数のときは数の代わりに｢Fizz｣と返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3を渡したら文字列"Fizz"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5 の倍数のときは｢Buzz｣と返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5を渡したら文字列"Buzz"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 15を渡したら文字列"FizzBuzz"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; タイプ2の場合</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 1を渡したら文字列"1"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 2を渡したら文字列"2"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 の倍数のときは数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3を渡したら文字列"3"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5 の倍数のときは数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5を渡したら文字列"5"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 と 5 両方の倍数の場合には数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 15を渡したら文字列"15"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; タイプ3の場合</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 1を渡したら文字列"1"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 2を渡したら文字列"2"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 の倍数のときは数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3を渡したら文字列"3"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5 の倍数のときは数を文字列にして返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 5を渡したら文字列"5"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 15を渡したら文字列"FizzBuzz"を返す</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; それ以外のタイプの場合</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 例外を返す</simpara>
-</listitem>
-</itemizedlist>
-</section>
-<section xml:id="_クライアント_2">
-<title>クライアント</title>
-<itemizedlist mark="none">
-<listitem>
-<simpara>&#10003; カウンター画面</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 画面イメージを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; APIサービスを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; APIサービスと連携するクライアントサービスを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 正常系を実装する</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; UIを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; UIとクライアントサービスを連携する</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 一覧表示画面</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 画面イメージを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; APIサービスを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; APIサービスと連携するクライアントサービスを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; 正常系を実装する</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; UIを作る</simpara>
-</listitem>
-<listitem>
-<simpara>&#10003; UIとクライアントサービスを連携する</simpara>
-</listitem>
-</itemizedlist>
-</section>
-</section>
-<section xml:id="_ユースケース図_2">
-<title>ユースケース図</title>
-
-</section>
-<section xml:id="_クラス図_2">
-<title>クラス図</title>
-<screen>package Application {
-  package Service {
-    class FizzBuzzService {
-      String generate()
-      String generate_list()
-    }
-    interface FizzBuzzCommand {
-      execute()
-    }
-
-    class FizzBuzzValueCommand {
-      FizzBuzzType type
-      FizzBuzzValue execute()
-    }
-
-    class FizzBuzzListCommand {
-      FizzBuzzType type
-      FizzBuzzList execute()
-    }
-  }
-}
-
-package Domain {
-    package Model {
-      class FizzBuzzValue {
-        Integer number
-        String value
-        boolean eql()
-      }
-
-      class FizzBuzzList {
-        MAX_COUNT = 100
-        ArrayList list
-        FizzBuzzList add()
-      }
-    }
-
-    package Type {
-      class FizzBuzzType {
-        TYPE_01 = 1
-        TYPE_02 = 2
-        TYPE_03 = 3
-        FizzBuzzType {static} create()
-        Boolean is_fizz()
-        Boolean is_buzz()
-        String generate()
-      }
-
-      class FizzBuzzType01 {
-        String generate()
-      }
-
-      class FizzBuzzType02 {
-        String generate()
-      }
-
-      class FizzBuzzType03 {
-        String generate()
-      }
-    }
-}
-
-package Presentation {
-  class FizzBuzzApiService {
-    apiUrl
-    generate()
-    generateList()
-  }
-
-  class FizzBuzzView {
-    _service
-    _counterComponent
-    _tableComponent
-    render()
-  }
-
-  class FizzBuzzCounterComponent {
-    _service
-    _conter
-    _value
-    incrementEvent()
-    decrementEvent()
-    render()
-  }
-
-  class FizzBuzzTableComponent {
-    _service
-    _list
-    _type
-    changeEvent()
-    render()
-  }
-}
-
-FizzBuzzService -&gt; FizzBuzzCommand
-FizzBuzzCommand &lt;|-- FizzBuzzValueCommand
-FizzBuzzCommand &lt;|-- FizzBuzzListCommand
-FizzBuzzCommand *- FizzBuzzType
-FizzBuzzType &lt;|-- FizzBuzzType01
-FizzBuzzType &lt;|-- FizzBuzzType02
-FizzBuzzType &lt;|-- FizzBuzzType03
-FizzBuzzType -&gt; FizzBuzzValue
-FizzBuzzListCommand --&gt; FizzBuzzList
-FizzBuzzService &lt;--- FizzBuzzApiService
-FizzBuzzApiService --* FizzBuzzView
-FizzBuzzView *- FizzBuzzCounterComponent
-FizzBuzzTableComponent -* FizzBuzzView</screen>
-</section>
-<section xml:id="_シーケンス図_2">
-<title>シーケンス図</title>
-
-</section>
-</section>
-<section xml:id="_開発_2">
-<title>開発</title>
-<section xml:id="_application">
-<title>Application</title>
-<section xml:id="_service">
-<title>Service</title>
-<programlisting language="ruby" linenumbering="unnumbered">Unresolved directive in fizz_buzz.adoc - include::../../../api/index.rb[]</programlisting>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/generate.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/generate_list.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_service.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_command.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_list_command.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/application/service/fizz_buzz_value_command.rb[]</screen>
-</section>
-</section>
-<section xml:id="_domain">
-<title>Domain</title>
-<section xml:id="_modle">
-<title>Modle</title>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/model/fizz_buzz_list.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/model/fizz_buzz_value.rb[]</screen>
-</section>
-<section xml:id="_type">
-<title>Type</title>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_01.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_02.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/fizz_buzz/domain/type/fizz_buzz_type_03.rb[]</screen>
-</section>
-</section>
-<section xml:id="_presentation">
-<title>Presentation</title>
-<programlisting language="javascript" linenumbering="unnumbered">Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzApiService.js[]</programlisting>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzView.js[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzCounterComponent.js[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../src/presentation/FizzBuzzTableComponent.js[]</screen>
-</section>
-<section xml:id="_test">
-<title>Test</title>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_list_command_test.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_value_command_test.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../api/test/fizz_buzz/fizz_buzz_service_test.rb[]</screen>
-<screen>Unresolved directive in fizz_buzz.adoc - include::../../../test/FizzBuzzApiService.test.js[]</screen>
-</section>
-</section>
-<section xml:id="_参照_2">
-<title>参照</title>
-<itemizedlist>
-<listitem>
-<simpara><link xl:href="http://asciidoctor.org/">Asciidoctor</link></simpara>
-</listitem>
-<listitem>
-<simpara><link xl:href="http://www.plantuml.com">PlantUML</link></simpara>
-</listitem>
-</itemizedlist>
-</section>
 </section>
 </article>
